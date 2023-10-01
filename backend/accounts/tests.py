@@ -12,11 +12,59 @@ from .models import User
 username_field = User.USERNAME_FIELD
 
 
+def get_user_data(usr="22b1231", pwd="testpass123"):
+    return {username_field: usr, "password": pwd}
+
+
+def parse_response_to_json(response):
+    stream = BytesIO(response.content)
+    return JSONParser().parse(stream)
+
+
+class RegistrationTest(APITestCase):
+    test_data = get_user_data()
+    weak_pass_test_data = get_user_data(pwd="password")
+    num_pass_test_data = get_user_data(pwd="23571113")
+    registration_url = reverse("accounts:register_user")
+
+    def test_successful_registration(self):
+        """
+        Ensure that a user is successfully created.
+        """
+        request_data = self.test_data
+        response = self.client.post(self.registration_url, request_data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        data = parse_response_to_json(response)
+        self.assertEqual(request_data[username_field], data[username_field])
+
+    def test_weak_password_common(self):
+        """
+        Ensure that a user is NOT created when a common password is used.
+        """
+        request_data = self.weak_pass_test_data
+        response = self.client.post(self.registration_url, request_data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        data = parse_response_to_json(response)
+        self.assertEqual(data["password"], ["This password is too common."])
+
+    def test_weak_password_numeric(self):
+        """
+        Ensure that a user is NOT created when a password of only numbers is used.
+        """
+        request_data = self.num_pass_test_data
+        response = self.client.post(self.registration_url, request_data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        data = parse_response_to_json(response)
+        self.assertEqual(data["password"], ["This password is entirely numeric."])
+
+
 class TokenTest(APITestCase):
     authenticator = JWTAuthentication()
     token_obtain_pair_url = reverse("accounts:token_obtain_pair")
-    test_user_data = {username_field: "student123", "password": "strongpassword#bday"}
-    wrong_user_data = {username_field: "student123", "password": "wrongpassword"}
+    test_user_data = get_user_data()
+    wrong_user_data = get_user_data(pwd="wrongpassword")
 
     def test_obtain_token_pair_valid_credentials(self):
         """
@@ -29,8 +77,7 @@ class TokenTest(APITestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        stream = BytesIO(response.content)
-        data = JSONParser().parse(stream)
+        data = parse_response_to_json(response)
         access_token = AccessToken(token=data["access"])
         refresh_token = RefreshToken(token=data["refresh"])
         self.assertEqual(user, self.authenticator.get_user(access_token))
