@@ -56,7 +56,7 @@ class MentorRequest(models.Model):
     User. Doubles as the (co-)mentor request table
     """
 
-    mentor = models.ForeignKey(User, on_delete=models.SET_NULL)
+    mentor = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     is_accepted = models.BooleanField(default=False)
 
