@@ -42,7 +42,7 @@ class Project(models.Model):
         default=1, validators=[MinValueValidator(1), MaxValueValidator(20)]
     )
     mentee_max = models.IntegerField(
-        required=True, validators=[MinValueValidator(1), MaxValueValidator(20)]
+        blank=False, validators=[MinValueValidator(1), MaxValueValidator(20)]
     )
 
     abstract = models.TextField(max_length=500)
