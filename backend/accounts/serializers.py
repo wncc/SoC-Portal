@@ -17,4 +17,8 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         return password
 
     def create(self, validated_data):
+        """
+        Override the create mehtod with objects.create_user,
+        since the former saves with an unencrypted password
+        """
         return User.objects.create_user(**validated_data)

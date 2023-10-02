@@ -13,6 +13,7 @@ class UserCreationForm(BaseUserCreationForm):
 
 
 class UserChangeForm(forms.ModelForm):
+    # The password field contains a link to the PasswordChangeForm, which is added during initialization
     password = ReadOnlyPasswordHashField(
         label=_("Password"),
         help_text=_(

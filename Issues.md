@@ -11,3 +11,4 @@
 - Something something CSRF
 - Roll number doesn't really require roll
 - Current password validation implementation for Register User doesn't work properly for fields that also req the user. [Relevant StackOverflow question](https://stackoverflow.com/questions/36414804/integrate-django-password-validators-with-django-rest-framework-validate-passwor)
+- Default season name

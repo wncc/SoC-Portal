@@ -6,13 +6,17 @@ from .forms import UserChangeForm, UserCreationForm
 
 
 class UserAdmin(BaseUserAdmin):
-    # The forms to add and change user instances
+    """
+    ModelAdmin for accounts.User. Inherits from the ModelAdmin for auth.User,
+    with some values over-riden to account for the differences in both models.
+    """
+
     form = UserChangeForm
     add_form = UserCreationForm
 
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
-    # that reference specific fields on auth.User.
+    # that reference specific fields on auth.User (username)
     list_display = ["roll_number", "email", "is_active", "is_staff"]
     list_filter = ["is_active", "is_staff"]
     fieldsets = [
