@@ -7,13 +7,16 @@ class RegisterUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["roll_number", "email", "password"]
-        extra_kwargs = {"password": {"write_only": True}}
+        extra_kwargs = {
+            "password": {"style": {"input_type": "password"}, "write_only": True}
+        }
 
     def validate_password(self, password):
         """
         Validate the password against all password validators.
         """
         validate_password(password)
+
         return password
 
     def create(self, validated_data):
@@ -22,3 +25,11 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         since the former saves with an unencrypted password
         """
         return User.objects.create_user(**validated_data)
+
+
+class UserAutoCompleteSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(source="get_full_name")
+
+    class Meta:
+        model = User
+        fields = ["id", "roll_number", "name"]

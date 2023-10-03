@@ -1,7 +1,7 @@
-
 from django.urls import path
-from .views import ProjectCreateView
+from .views import ProjectSubmitView
 
+app_name = "dashboard"
 urlpatterns = [
-    path('', ProjectCreateView.as_view(), name='dashboard'),
+    path("mentor/submit/", ProjectSubmitView.as_view(), name="mentor_submit"),
 ]
