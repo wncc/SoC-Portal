@@ -1,6 +1,6 @@
 # myapp/serializers.py
 from rest_framework import serializers
-from .models import Project, ProjectSubmission
+from .models import Project, ProjectSubmission, MenteeForm
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -36,4 +36,8 @@ class ProjectSubmissionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProjectSubmission
+        fields = "__all__"
+class MenteeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MenteeForm
         fields = "__all__"
