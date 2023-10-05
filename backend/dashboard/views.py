@@ -3,6 +3,7 @@ from rest_framework import generics
 from .models import Project
 from .serializers import ProjectSubmissionSerializer, MenteeSerializer
 
+
 class ProjectSubmitView(generics.CreateAPIView):
     serializer_class = ProjectSubmissionSerializer
 
@@ -11,17 +12,19 @@ class ProjectSubmitView(generics.CreateAPIView):
         context.update({"request": self.request})
         return context
 
+
 class MenteeView(generics.CreateAPIView):
     serializer_class = MenteeSerializer
 
     def mentee_view(request):
-        if request.method == 'POST':
+        if request.method == "POST":
             # Check if the form is submitted
             form = MenteeSerializer(request.POST)
             if form.is_valid():
                 # Save the form data to the database
                 form.save()
-                return redirect('success_page')  # Redirect to a success page or another URL
+                # Redirect to a success page or another URL
+                return redirect("success_page")
         else:
             form = MenteeSerializer()
 

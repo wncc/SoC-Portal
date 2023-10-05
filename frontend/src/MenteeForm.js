@@ -1,7 +1,7 @@
 import { useState } from 'react';
- 
+
 export default function MenteeForm() {
- 
+
     // States for registration
     // role: 1 for mentor, 0 for mentee
     const [profile, setProfile] = useState({
@@ -16,7 +16,7 @@ export default function MenteeForm() {
     // States for checking the errors
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
- 
+
     // Handling the name change
     const handleProfile = (e) => {
         const { id, value } = e.target;
@@ -27,7 +27,7 @@ export default function MenteeForm() {
         }));
         setSubmitted(false);
       };
- 
+
     // Handling the form submission
     const handleSubmit = (e) => {
         console.log(profile);
@@ -39,7 +39,7 @@ export default function MenteeForm() {
             setError(false);
         }
     };
- 
+
     const role0 = () => {
         profile.role = 0;
     }
@@ -70,7 +70,7 @@ export default function MenteeForm() {
         </>
         );
     };
- 
+
     // Showing error message if error is true
     const errorMessage = () => {
         return (
@@ -83,19 +83,19 @@ export default function MenteeForm() {
             </div>
         );
     };
- 
+
     return (
         <div className="form">
             <div>
                 <h1>SoC Registration</h1>
             </div>
- 
+
             {/* Calling to the methods */}
             <div className="messages">
                 {errorMessage()}
                 {successMessage()}
             </div>
- 
+
             <form>
                 <button onClick={role0} className='btn' defaultChecked>Mentee</button>
                 <button onClick={role1} className='btn'>Mentor</button>
@@ -111,22 +111,22 @@ export default function MenteeForm() {
                 <label className="label">Phone Number (WhatsApp)</label>
                 <input id = 'phone' onChange={handleProfile} className="input"
                      type="number" />
- 
+
                 <label className="label">Email</label>
                 <input id = 'email' onChange={handleProfile} className="input"
                     type="email" />
- 
+
                 <label className="label">Password</label>
                 <input id = 'password' onChange={handleProfile} className="input"
                      type="password" />
- 
+
                 <button onClick={handleSubmit} className="btn"
                         type="submit">
                     Register
                 </button>
             </form>
-            
+
         </div>
-        
+
     );
 }

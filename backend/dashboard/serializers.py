@@ -39,6 +39,8 @@ class ProjectSubmissionSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectSubmission
         fields = "__all__"
+
+
 class MenteeSerializer(serializers.ModelSerializer):
     class Meta:
         model = MenteeForm
