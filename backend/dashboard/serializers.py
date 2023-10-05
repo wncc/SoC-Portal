@@ -18,7 +18,7 @@ class ProjectSubmissionSerializer(serializers.ModelSerializer):
 
     project = ProjectSerializer()
     co_mentors = serializers.ListField(
-        child=serializers.IntegerField(), write_only=True
+        child=serializers.IntegerField(), write_only=True, required=False
     )
 
     def create(self, validated_data):
@@ -28,8 +28,10 @@ class ProjectSubmissionSerializer(serializers.ModelSerializer):
         first_mentor = self.context["request"].user
         project.mentors.add(first_mentor, through_defaults={"is_accepted": True})
 
-        if validated_data["co_mentors"] and len(validated_data["co_mentors"]):
-            project.mentors.add(*(validated_data.pop("co_mentors")))
+        if validated_data.get("co_mentors", None) is not None:
+            co_mentors = validated_data.pop("co_mentors")
+            if len(co_mentors):
+                project.mentors.add(*co_mentors)
 
         submission = ProjectSubmission.objects.create(project=project, **validated_data)
         return submission
