@@ -82,6 +82,7 @@ class Project(models.Model):
     # Need some representation for timeline
 
 
+
 class MentorRequest(models.Model):
     """
     Explicit many-to-many linking table between Project and
@@ -101,3 +102,18 @@ class ProjectSubmission(models.Model):
 
     project = models.OneToOneField(Project, on_delete=models.CASCADE)
     sop = models.TextField()  # Should decide between storing text vs Google Doc link
+
+class MenteeForm(models.Model):
+    """
+    Allows mentee to choose their preference 
+    """
+    class ProjectChoices(models.TextChoices):
+        Deep_Carlsen="Deep Carlsen"
+        InstiExchange="InstiExchange"
+        Image_Captioning=" Image Captioning"
+        CricBuzz="CricBuzz"
+        SynerG_Lab="SynerG Lab"
+
+    Preference1 = models.CharField(max_length=255,choices=ProjectChoices.choices)
+    Preference2 = models.CharField(max_length=255,choices=ProjectChoices.choices)
+    Preference3 = models.CharField(max_length=255,choices=ProjectChoices.choices)
