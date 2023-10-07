@@ -1,0 +1,12 @@
+.container{
+    width :200px;
+    height: 150px;
+    border-radius: 4cm;
+    background-color: white;
+    text-align: center;
+    margin-top: 20px;
+    border-color: black;
+    border: 2px solid black;
+    margin-left: 16px;
+    margin-right: 16px;
+}
