@@ -2,9 +2,7 @@ import React from "react";
 // import PropTypes from "prop-types";
 import MenteeForm from "./MenteeForm";
 import {
-  createBrowserRouter,
-  RouterProvider,
-  useRoutes,
+  Link
 } from "react-router-dom";
 
 
@@ -23,12 +21,12 @@ const routes = [
   // Add more routes as needed
 ];
 
-const router = createBrowserRouter(routes);
+// const router = createBrowserRouter(routes);
 
-const handleButtonClick = () => {
-  // Use the router to navigate to a specific route
-  router.navigate('/'); // Replace '/' with the desired route
-};
+// const handleButtonClick = () => {
+//   // Use the router to navigate to a specific route
+//   router.navigate('/'); // Replace '/' with the desired route
+// };
 
 
 export default function Navbar(props){
@@ -46,10 +44,8 @@ export default function Navbar(props){
                 <a className="nav-link active" aria-current="page" href="/">Home</a>
               </li>
               <li className="nav-item">
-                {/* <a className="nav-link" href="/" onClick={<RouterProvider router={router}/>}>Register</a> */}
-                <button onClick={handleButtonClick}>
-                  Register
-                </button>
+                <a className="nav-link" href="/register" >Register</a>
+                  {/* <Link to="/register">Register</Link>              */}
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/">Previous Projects</a>
