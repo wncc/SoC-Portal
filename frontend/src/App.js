@@ -1,6 +1,11 @@
 import './App.css';
 import React from 'react';
 import MenteeForm from "./MenteeForm"
+import Navbar from './components/Navbar';
+import Textform from './components/Textform';
+import Reviews from './components/Reviews';
+import "./components/scrollable.css"
+import Button from './components/Button';
 
 
 export default function App() {
