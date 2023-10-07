@@ -1,0 +1,16 @@
+.containerscrollable{
+    width: 100%;
+    overflow-x: scroll;
+    white-space: nowrap;
+    display: flex;
+    margin-left: 16px;
+    margin-right: 16px;
+    padding-right: 20px;
+}
+
+
+.background{
+    background-color: aqua;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
