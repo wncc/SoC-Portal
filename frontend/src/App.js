@@ -11,9 +11,7 @@ import Button from './components/Button';
 export default function App() {
   return (
     <>
-    <div className="App">
-      <MenteeForm />
-    </div>
+      <div class="background">
           <Navbar title="SOC"/>
           <Textform />
           <div class="containerscrollable">
