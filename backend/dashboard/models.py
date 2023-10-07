@@ -1,5 +1,5 @@
-from django.db import models
 from accounts.models import User
+from django.db import models
 from projects.models import Project, Season, get_current_id
 
 

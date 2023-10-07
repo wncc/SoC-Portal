@@ -1,8 +1,8 @@
 import re
 
-from rest_framework import generics
 from django.db.models import Value as V
 from django.db.models.functions import Concat
+from rest_framework import generics
 
 from .models import User
 from .serializers import RegisterUserSerializer, UserAutoCompleteSerializer

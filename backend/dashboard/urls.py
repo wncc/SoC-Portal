@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import ProjectSubmitView, MenteeView
+
+from .views import MenteeView, ProjectSubmitView
 
 app_name = "dashboard"
 urlpatterns = [

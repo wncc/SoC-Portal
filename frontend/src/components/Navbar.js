@@ -30,7 +30,7 @@ const routes = [
 
 
 export default function Navbar(props){
-  
+
     return(
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">

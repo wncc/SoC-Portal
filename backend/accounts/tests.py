@@ -6,7 +6,6 @@ from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
 
 from .models import User
 
-
 username_field = User.USERNAME_FIELD
 
 
