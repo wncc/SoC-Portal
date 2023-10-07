@@ -11,6 +11,8 @@ staticfiles/
 
 # Ignore database files
 *.sqlite3
+**/migrations/
+
 
 # Ignore system files created by your operating system
 .DS_Store
