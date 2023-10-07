@@ -21,7 +21,7 @@ export default function App() {
           <Route path="/live" element={<Live />} />
           <Route path="/contact" element={<Contact />} /> */}
         </Routes>
-      
+
         <div class="containerscrollable">
           <Reviews Name="abc" text="what he has to say" value={0} />
           <Reviews Name="abc" text="what he has to say" value={50} />

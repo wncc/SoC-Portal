@@ -11,7 +11,7 @@ export default function Textform(){
             </h2>
             <p class ="text" >
                 SOC is one of the flagship events organised by WnCC, IIT Bombay. In this event a number of project are provided
-                to the students and they have to apply for the project according to their interest. if selected they are provided 
+                to the students and they have to apply for the project according to their interest. if selected they are provided
                 mentors who are expert in their respective fields and help the students complete their project.
             </p>
         </div>
@@ -39,7 +39,7 @@ export default function Textform(){
                 </div>
                 <div class="container1">
                 </div>
-        </div>        
+        </div>
         <div>
             <h2>
                 Reviews
