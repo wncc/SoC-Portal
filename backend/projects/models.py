@@ -44,7 +44,6 @@ class Season(models.Model):
 
     name = models.CharField(max_length=100, default=default_season_name)
     is_active = models.BooleanField(default=False)
-
     objects = SeasonManager()
 
     def __str__(self):
