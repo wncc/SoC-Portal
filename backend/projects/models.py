@@ -1,8 +1,8 @@
-from django.db import models
-from django.core.validators import MinValueValidator, MaxValueValidator
-from django.utils import timezone
 from accounts.models import User
 from django.conf import settings
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
+from django.utils import timezone
 
 
 def default_season_name():
@@ -44,7 +44,6 @@ class Season(models.Model):
 
     name = models.CharField(max_length=100, default=default_season_name)
     is_active = models.BooleanField(default=False)
-
     objects = SeasonManager()
 
     def __str__(self):

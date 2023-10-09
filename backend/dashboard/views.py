@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from rest_framework import generics, settings
-from .serializers import ProjectSubmissionSerializer, MenteeSerializer
-from .permissions import IsOwnerOrReadOnly
+
 from .models import MenteeForm
+from .permissions import IsOwnerOrReadOnly
+from .serializers import MenteeSerializer, ProjectSubmissionSerializer
 
 
 class ProjectSubmitView(generics.CreateAPIView):

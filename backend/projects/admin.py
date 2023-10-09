@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Season, Project
+
+from .models import Project, Season
 
 # Register your models here.
 admin.site.register(Season)

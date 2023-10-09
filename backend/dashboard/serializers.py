@@ -1,8 +1,9 @@
 # myapp/serializers.py
-from rest_framework import serializers
-from .models import ProjectSubmission, MenteeForm
-from projects.serializers import ProjectSerializer
 from projects.models import Project
+from projects.serializers import ProjectSerializer
+from rest_framework import serializers
+
+from .models import MenteeForm, ProjectSubmission
 
 
 class ProjectSubmissionSerializer(serializers.ModelSerializer):

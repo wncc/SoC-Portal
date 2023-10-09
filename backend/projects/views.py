@@ -1,7 +1,7 @@
 from rest_framework import generics
 
-from .serializers import ProjectSerializer
 from .models import Project
+from .serializers import ProjectSerializer
 
 
 class ProjectListView(generics.ListAPIView):
