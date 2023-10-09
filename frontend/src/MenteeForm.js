@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 
 export default function MenteeForm() {
 
@@ -6,8 +7,9 @@ export default function MenteeForm() {
     // role: 1 for mentor, 0 for mentee
     const [profile, setProfile] = useState({
         role: '0',
-        name: '',
-        roll: '',
+        first_name: '',
+        last_name: '',
+        roll_number: '',
         phone: '',
         email: '',
         password: '',
@@ -32,13 +34,20 @@ export default function MenteeForm() {
     const handleSubmit = (e) => {
         console.log(profile);
         e.preventDefault();
-        if (profile.name === '' || profile.email === '' || profile.password === '' || profile.phone === '' || profile.roll === '') {
+        if (profile.first_name === '' ||profile.last_name === '' || profile.email === '' || profile.password === '' || profile.phone === '' || profile.roll_number === '') {
             setError(true);
         } else {
             setSubmitted(true);
             setError(false);
         }
+        axios.post('api/accounts/register/',profile)
+        .then(res =>{
+            window.location.href = '/'
+            console.log(res)
+        })
     };
+
+
 
     const role0 = () => {
         profile.role = 0;
@@ -84,7 +93,12 @@ export default function MenteeForm() {
         );
     };
 
+
+
     return (
+            
+
+
         <div className="form">
             <div>
                 <h1>SoC Registration</h1>
@@ -105,7 +119,7 @@ export default function MenteeForm() {
                      type="text" />
 
                 <label className="label">Roll Number</label>
-                <input id = 'roll' onChange={handleProfile} className="input"
+                <input id = 'roll_number' onChange={handleProfile} className="input"
                      type="text" />
 
                 <label className="label">Phone Number (WhatsApp)</label>

@@ -83,9 +83,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "backend.wsgi.application"
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'accounts.custom_auth.CookieJWTAuthentication',
-    ),
+    "DEFAULT_AUTHENTICATION_CLASSES": ("accounts.custom_auth.CookieJWTAuthentication",),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
 }
 
@@ -97,7 +95,6 @@ SIMPLE_JWT = {
 }
 
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -107,6 +104,14 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+
+# Image Storage
+# Actual directory user files go to
+MEDIA_ROOT = BASE_DIR / "mediafiles"
+
+# URL used to access the media
+MEDIA_URL = "/media/"
 
 
 # Password validation
@@ -145,8 +150,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_URL = "/static/"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
+# Add the 'django.contrib.staticfiles' app to your INSTALLED_APPS.
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

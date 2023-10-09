@@ -3,24 +3,12 @@ from django.db import models
 from projects.models import Project, Season, get_current_id
 
 
-class ProjectSubmission(models.Model):
-    """
-    Contains a reference to a project, along with details of
-    a project only relevant during mentor/project registration.
-    """
-
-    project = models.OneToOneField(Project, on_delete=models.CASCADE)
-    sop = models.TextField()  # Should decide between storing text vs Google Doc link
-
-
-class MenteeForm(models.Model):
+class Mentee(models.Model):
     """
     Allows mentee to choose their preference
     """
 
-    mentee = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="application"
-    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     season = models.ForeignKey(
         Season,
         on_delete=models.PROTECT,
@@ -29,13 +17,24 @@ class MenteeForm(models.Model):
 
     preferences = models.ManyToManyField(Project, through="MenteePreference")
 
+    def __str__(self):
+        return self.user.roll_number
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "season"],
+                name="unique_user_season",
+            )
+        ]
+
 
 class MenteePreference(models.Model):
     """
     Preferences of a mentee (ie a user during a specific season)
     """
 
-    form = models.ForeignKey(MenteeForm, on_delete=models.CASCADE)
+    form = models.ForeignKey(Mentee, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
     sop = models.TextField()

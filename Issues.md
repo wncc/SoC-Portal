@@ -13,3 +13,9 @@
 - Current password validation implementation for Register User doesn't work properly for fields that also req the user. [Relevant StackOverflow question](https://stackoverflow.com/questions/36414804/integrate-django-password-validators-with-django-rest-framework-validate-passwor)
 - Default season name
 - Auto-save for mentee form
+- Safer(?) auth methods [ref](https://indepth.dev/posts/1382/localstorage-vs-cookies)
+- Timeline representation
+
+## Frontend
+
+- when we enter wrong pasword instead of site crash ouput a message

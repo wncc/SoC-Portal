@@ -1,7 +1,7 @@
-from django.shortcuts import redirect, render
+from projects.models import Season
 from rest_framework import generics, settings
 
-from .models import MenteeForm
+from .models import Mentee
 from .permissions import IsOwnerOrReadOnly
 from .serializers import MenteeSerializer, ProjectSubmissionSerializer
 
@@ -28,4 +28,6 @@ class MenteeView(generics.RetrieveUpdateAPIView):
         of the currently authenticated user.
         """
         user = self.request.user
-        form = MenteeForm.objects.get_or_create(mentee=user)
+        form = Mentee.objects.get_or_create(user=user, season=Season.objects.current())
+
+        return form[0]
