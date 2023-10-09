@@ -84,6 +84,7 @@ class Project(models.Model):
 
     abstract = models.TextField(max_length=500)
     description = models.TextField()
+    image = models.ImageField(upload_to='', default='me1.JPG')
     # Need some representation for timeline
 
     def __str__(self):
