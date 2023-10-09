@@ -54,6 +54,10 @@ def get_current_id():
     return Season.objects.current_id()
 
 
+def upload_to(instance, filename):
+    return "images/{filename}".format(filename=filename)
+
+
 class Project(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=255, blank=False)
@@ -84,7 +88,8 @@ class Project(models.Model):
 
     abstract = models.TextField(max_length=500)
     description = models.TextField()
-    # Need some representation for timeline
+    timeline = models.TextField()
+    banner_image = models.ImageField(upload_to=upload_to, blank=True, null=True)
 
     def __str__(self):
         return self.title

@@ -83,9 +83,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "backend.wsgi.application"
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'accounts.custom_auth.CookieJWTAuthentication',
-    ),
+    "DEFAULT_AUTHENTICATION_CLASSES": ("accounts.custom_auth.CookieJWTAuthentication",),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
 }
 
@@ -97,7 +95,6 @@ SIMPLE_JWT = {
 }
 
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -107,6 +104,14 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+
+# Image Storage
+# Actual directory user files go to
+MEDIA_ROOT = BASE_DIR / "mediafiles"
+
+# URL used to access the media
+MEDIA_URL = "/media/"
 
 
 # Password validation
