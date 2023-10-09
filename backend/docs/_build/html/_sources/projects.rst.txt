@@ -19,8 +19,8 @@ projects.admin module
    :members:
    :undoc-members:
    :show-inheritance:
- Here you can register your models 
- 
+ Here you can register your models
+
 projects.apps module
 --------------------
 

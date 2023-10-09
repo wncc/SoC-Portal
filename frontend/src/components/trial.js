@@ -10,7 +10,7 @@
 
 //        /*
 //   This example requires some changes to your config:
-  
+
 //   ```
 //   // tailwind.config.js
 //   module.exports = {
@@ -22,8 +22,8 @@
 //   }
 //   ```
 // */
-// export default function Login() {  
-  
+// export default function Login() {
+
 //   const navigate = useNavigate()
 
 //     const [credential, setCredential] = useState({Rollnumber: '', password: ''});
@@ -51,7 +51,7 @@
 //       <>
 //         {/*
 //           This example requires updating your template:
-  
+
 //           ```
 //           <html class="h-full bg-white">
 //           <body class="h-full">
@@ -64,7 +64,7 @@
 //               Sign in to your account
 //             </h2>
 //           </div>
-  
+
 //           <div>
 //             <form action="#" method="POST" onSubmit={handleSubmit}>
 //               <div>
@@ -76,11 +76,11 @@
 //                     name="Rollnumber"
 //                     type="text"
 //                     required
-                    
+
 //                   />
 //                 </div>
 //               </div>
-  
+
 //               <div>
 //                 <div>
 
@@ -98,18 +98,18 @@
 //                     id="password"
 //                     name="password"
 //                     required
-                    
+
 //                   />
 //                   {/* <div onClick={()=> setShowPassword(!showPassword)}> </div> */}
-                 
+
 
 //                 </div>
 //               </div>
-  
+
 //               <div>
 //                 <button
 //                   type="submit"
-                  
+
 //                 >
 //                   Sign in
 //                 </button>
@@ -117,6 +117,6 @@
 //             </form>
 //             </div>
 //         </div>
-//       </>  
+//       </>
 //       );
 // }
