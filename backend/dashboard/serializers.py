@@ -5,7 +5,7 @@ from rest_framework import serializers
 from .models import Mentee, MenteePreference
 
 
-class ProjectSubmissionSerializer(serializers.ModelSerializer):
+class ProjectAdditionSerializer(serializers.ModelSerializer):
     """
     Note: this serializer has a nested project.mentors field, but since this is
     read_only and co_mentors is write_only, this does not cause any issues.
@@ -46,7 +46,7 @@ class MenteeSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         # Extract preferences from validated data
-        preferences = validated_data.pop("preferences")
+        preferences = validated_data.pop("preferences", [])
 
         instance.preferences.set([])
         instance.save()

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "drf_yasg",
     "accounts",
     "projects",
     "dashboard",
@@ -106,14 +107,6 @@ DATABASES = {
 }
 
 
-# Image Storage
-# Actual directory user files go to
-MEDIA_ROOT = BASE_DIR / "mediafiles"
-
-# URL used to access the media
-MEDIA_URL = "/media/"
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -150,10 +143,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = BASE_DIR / "static"
 STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+MEDIA_ROOT = BASE_DIR / "media"
 
 # Add the 'django.contrib.staticfiles' app to your INSTALLED_APPS.
 # Default primary key field type
