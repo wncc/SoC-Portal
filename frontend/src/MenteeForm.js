@@ -39,8 +39,13 @@ export default function MenteeForm() {
             setSubmitted(true);
             setError(false);
         }
-        
+        axios.post('api/accounts/token/',profile)
+        .then(res =>{
+            window.location.href = '/'
+        })
     };
+
+
 
     const role0 = () => {
         profile.role = 0;
@@ -86,7 +91,7 @@ export default function MenteeForm() {
         );
     };
 
-    
+
 
     return (
             

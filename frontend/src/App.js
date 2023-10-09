@@ -25,7 +25,7 @@ export default function App() {
           <Route path="/Previous Projects" element={<Login/>}/>
         </Routes>
 
-        <div class="containerscrollable">
+        {/* <div class="containerscrollable">
           <Reviews Name="abc" text="what he has to say" value={0} />
           <Reviews Name="abc" text="what he has to say" value={50} />
           <Reviews Name="cde" text="what he has to say" value={50} />
@@ -34,7 +34,7 @@ export default function App() {
               click
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

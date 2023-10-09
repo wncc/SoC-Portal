@@ -29,9 +29,8 @@ export default function Login() {
     const handleSubmit = (e) => {
         console.log(profile);
         e.preventDefault();
-        axios.post('api/accounts/token/', profile).then(res =>{
-            console.log(res)
-      
+        axios.post('api/accounts/regiser/', profile).then(res =>{
+            window.location.href = '/'  
         })
             
             
