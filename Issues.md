@@ -15,3 +15,7 @@
 - Auto-save for mentee form
 - Safer(?) auth methods [ref](https://indepth.dev/posts/1382/localstorage-vs-cookies)
 - Timeline representation
+
+## Frontend
+
+- when we enter wrong pasword instead of site crash ouput a message
