@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.forms import UserCreationForm as BaseUserCreationForm
+from django.contrib.auth.forms import UsernameField
 from django.utils.translation import gettext_lazy as _
 
 from .models import User
@@ -10,10 +11,12 @@ class UserCreationForm(BaseUserCreationForm):
     class Meta:
         model = User
         fields = ("roll_number", "email")
+        field_classes = {"roll_number": UsernameField}
 
 
 class UserChangeForm(forms.ModelForm):
     # The password field contains a link to the PasswordChangeForm, which is added during initialization
+
     password = ReadOnlyPasswordHashField(
         label=_("Password"),
         help_text=_(
@@ -26,6 +29,7 @@ class UserChangeForm(forms.ModelForm):
     class Meta:
         model = User
         fields = "__all__"
+        field_classes = {"roll_number": UsernameField}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

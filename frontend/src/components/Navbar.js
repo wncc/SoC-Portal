@@ -48,7 +48,11 @@ export default function Navbar(props){
                   {/* <Link to="/register">Register</Link>              */}
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/Previous Projects">Previous Projects</a>
+                <a className="nav-link" href="/current_projects">Current Projects</a>
+                {}
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/previous_projects">Login</a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/">Past Certificates</a>

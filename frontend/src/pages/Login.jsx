@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import Dashboard from '../components/Dashboard';
  
 export default function Login() {
  
@@ -29,8 +30,21 @@ export default function Login() {
     const handleSubmit = (e) => {
         console.log(profile);
         e.preventDefault();
-        axios.post('api/accounts/regiser/', profile).then(res =>{
-            window.location.href = '/'  
+        axios.post('api/accounts/token/', profile)
+        .then(function(profile){
+            console.log(profile.status)
+                if(profile.status === 200){
+                    window.location.href = '/Dashboard'
+
+                }
+                else{
+                    <h1>
+                        wrong username or password
+                    </h1>
+                }
+            }
+        ).catch(err=>{
+            alert(err.response.data.detail)
         })
             
             
@@ -73,7 +87,7 @@ export default function Login() {
     return (
         <div className="form">
             <div>
-                <h1>SoC Registration</h1>
+                <h1>SoC Login</h1>
             </div>
  
             {/* Calling to the methods */}
@@ -98,7 +112,7 @@ export default function Login() {
  
                 <button className="btn"
                         type="submit">
-                    Register
+                    Login
                 </button>
             </form>
             

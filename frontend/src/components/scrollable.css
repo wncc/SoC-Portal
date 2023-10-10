@@ -14,3 +14,11 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.LinkCSS{
+    height: 50px;
+    width: 100px;
+    border: 2px solid black;
+    margin-left: 6px;
+    background-color: white;
+}
