@@ -1,0 +1,74 @@
+[
+{
+  "model": "accounts.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$qF1H1kdiJYnWeRoqgkAs1t$MeWgj1U+HQLaNbpvuNO5ikgdsGxfeTzTFp7ESchExf0=",
+    "last_login": "2023-10-10T01:39:25.085Z",
+    "is_superuser": true,
+    "roll_number": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@adm.in",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-10-09T22:04:38.252Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$VeXHMq5rQHkB8JZaFy60oW$Niv2LkM2IgmgYnJJwqY7Xye2+kbTdSo2ANeiTvUUSeM=",
+    "last_login": null,
+    "is_superuser": false,
+    "roll_number": "22B1231",
+    "first_name": "",
+    "last_name": "",
+    "email": "22b1231@fake.ac.in",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-10-10T01:45:07.418Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$lqkVpBhybVfqmrJ50kw36K$H3RLUeH15crsSmenLBTbTJF/18Mrb1hd/947IFwfT08=",
+    "last_login": null,
+    "is_superuser": false,
+    "roll_number": "22B3945",
+    "first_name": "",
+    "last_name": "",
+    "email": "22b3945@fake.iitb.ac.in",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-10-10T01:59:55.590Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$jphuqHTplRg0J6daixaegj$kxfl2PxVHdyUXLeeSBM9TrDGKJwVEyUKy1w1LZvNiR4=",
+    "last_login": null,
+    "is_superuser": false,
+    "roll_number": "22B0453",
+    "first_name": "",
+    "last_name": "",
+    "email": "22b0453@fake.ac.in",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-10-10T02:01:08.927Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]

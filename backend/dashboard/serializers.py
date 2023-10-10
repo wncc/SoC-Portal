@@ -30,6 +30,7 @@ class ProjectAdditionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = "__all__"
+        read_only_fields = ["season"]
 
 
 class MenteePreferenceSerializer(serializers.ModelSerializer):
@@ -37,7 +38,7 @@ class MenteePreferenceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MenteePreference
-        exclude = ["id", "form"]
+        exclude = ["form"]
         read_only_fields = ["title"]
 
 
