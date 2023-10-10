@@ -1,13 +1,12 @@
-from django.shortcuts import redirect, render
-from rest_framework import generics, settings
+from projects.models import Season
+from rest_framework import generics
 
-from .models import MenteeForm
-from .permissions import IsOwnerOrReadOnly
-from .serializers import MenteeSerializer, ProjectSubmissionSerializer
+from .models import Mentee
+from .serializers import MenteeSerializer, ProjectAdditionSerializer
 
 
 class ProjectSubmitView(generics.CreateAPIView):
-    serializer_class = ProjectSubmissionSerializer
+    serializer_class = ProjectAdditionSerializer
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
@@ -17,10 +16,6 @@ class ProjectSubmitView(generics.CreateAPIView):
 
 class MenteeView(generics.RetrieveUpdateAPIView):
     serializer_class = MenteeSerializer
-    permission_classes = [
-        *settings.api_settings.DEFAULT_PERMISSION_CLASSES,
-        IsOwnerOrReadOnly,
-    ]
 
     def get_object(self):
         """
@@ -28,4 +23,6 @@ class MenteeView(generics.RetrieveUpdateAPIView):
         of the currently authenticated user.
         """
         user = self.request.user
-        form = MenteeForm.objects.get_or_create(mentee=user)
+        form = Mentee.objects.get_or_create(user=user, season=Season.objects.current())
+
+        return form[0]

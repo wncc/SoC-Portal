@@ -25,16 +25,17 @@ class ProjectSubmissionTest(APITestCase):
             + "to provide clarity and understanding. They play a crucial role in conveying the nuances and details of "
             + "objects, concepts, or experiences, allowing individuals to gain a more complete and accurate perception."
         ),
+        "timeline": (
+            "Week 1: Define project scope and objectives\n"
+            + "Week 2: Set up version control (e.g., Git) and development environment\n"
+            + "Week 3: Initial project setup and basic user interface\n"
+            + "Week 4: Develop and test core functionalities\n"
+            + "Week 5: Conduct first round of testing and implement user feedback\n"
+            + "Week 6: Implement advanced features and begin integration testing\n"
+            + "Week 7: Finalize testing, debugging, and user acceptance testing\n"
+            + "Week 8: Deployment to production, conduct training sessions, and evaluate project success"
+        ),
     }
-    sop = (  # Thank you ChatGPT
-        "I find myself in the paradoxical pursuit of penning down a Statement of Purpose "
-        + "on the merits of writing a Statement of Purpose. In this recursive endeavor, "
-        + "my objective is to articulate the intrinsic motivations and aspirations that drive "
-        + "this act of self-reflection. Through the convolution of words, I aim to navigate "
-        + "the labyrinth of intent, elucidating the why behind the why, and the purpose behind "
-        + "the purpose. As I embark on this linguistic adventure, the meta-narrative unfolds, "
-        + "revealing the delightful complexity of expressing a purpose for expressing a purpose."
-    )
 
     def setUp(self):
         Season.objects.create()
@@ -53,9 +54,8 @@ class ProjectSubmissionTest(APITestCase):
 
     def test_project_submission(self):
         project_submission_data = {
-            "project": self.project_data,
+            **self.project_data,
             "co_mentors": [2, 3],
-            "sop": self.sop,
         }
 
         response = self.client.post(
@@ -63,12 +63,11 @@ class ProjectSubmissionTest(APITestCase):
         )
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertListEqual(response.data["project"]["mentors"], [1, 2, 3])
+        self.assertListEqual(response.data["mentors"], [1, 2, 3])
 
     def test_project_no_co_mentor_field(self):
         project_submission_data = {
-            "project": self.project_data,
-            "sop": self.sop,
+            **self.project_data,
         }
 
         response = self.client.post(
@@ -76,13 +75,12 @@ class ProjectSubmissionTest(APITestCase):
         )
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertListEqual(response.data["project"]["mentors"], [1])
+        self.assertListEqual(response.data["mentors"], [1])
 
     def test_project_no_co_mentors(self):
         project_submission_data = {
-            "project": self.project_data,
+            **self.project_data,
             "co_mentors": [],
-            "sop": self.sop,
         }
 
         response = self.client.post(
@@ -90,4 +88,4 @@ class ProjectSubmissionTest(APITestCase):
         )
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertListEqual(response.data["project"]["mentors"], [1])
+        self.assertListEqual(response.data["mentors"], [1])

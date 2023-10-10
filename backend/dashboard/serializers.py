@@ -1,44 +1,66 @@
 # myapp/serializers.py
 from projects.models import Project
-from projects.serializers import ProjectSerializer
 from rest_framework import serializers
 
-from .models import MenteeForm, ProjectSubmission
+from .models import Mentee, MenteePreference
 
 
-class ProjectSubmissionSerializer(serializers.ModelSerializer):
+class ProjectAdditionSerializer(serializers.ModelSerializer):
     """
     Note: this serializer has a nested project.mentors field, but since this is
     read_only and co_mentors is write_only, this does not cause any issues.
     """
 
-    project = ProjectSerializer()
     co_mentors = serializers.ListField(
         child=serializers.IntegerField(), write_only=True, required=False
     )
 
     def create(self, validated_data):
-        project_data = validated_data.pop("project")
-        project = Project.objects.create(**project_data)
+        co_mentors = validated_data.pop("co_mentors", [])
+        project = Project.objects.create(**validated_data)
 
         first_mentor = self.context["request"].user
         project.mentors.add(first_mentor, through_defaults={"is_accepted": True})
 
-        if validated_data.get("co_mentors", None) is not None:
-            co_mentors = validated_data.pop("co_mentors")
-            if len(co_mentors):
-                project.mentors.add(*co_mentors)
+        if len(co_mentors):
+            project.mentors.add(*co_mentors)
 
-        submission = ProjectSubmission.objects.create(project=project, **validated_data)
-        return submission
+        return project
 
     class Meta:
-        model = ProjectSubmission
+        model = Project
         fields = "__all__"
+        read_only_fields = ["season"]
+
+
+class MenteePreferenceSerializer(serializers.ModelSerializer):
+    title = serializers.CharField(source="project.title")
+
+    class Meta:
+        model = MenteePreference
+        exclude = ["form"]
+        read_only_fields = ["title"]
 
 
 class MenteeSerializer(serializers.ModelSerializer):
+    preferences = MenteePreferenceSerializer(many=True, max_length=3, required=True)
+
+    def update(self, instance, validated_data):
+        # Extract preferences from validated data
+        preferences = validated_data.pop("preferences", [])
+
+        instance.preferences.set([])
+        instance.save()
+
+        # For each preference, populate the value of the form ID, and add to db
+        for preference in preferences:
+            preference["form"] = instance.id
+            MenteePreference.objects.create(preference)
+
+        instance.refresh_from_db()
+        return instance
+
     class Meta:
-        model = MenteeForm
+        model = Mentee
         fields = "__all__"
-        read_only_fields = ["mentee"]
+        read_only_fields = ["mentee", "season"]

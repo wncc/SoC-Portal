@@ -4,6 +4,7 @@ repos:
     hooks:
       - id: check-yaml
       - id: end-of-file-fixer
+        exclude: requirements.txt
       - id: trailing-whitespace
   - repo: https://github.com/psf/black
     rev: "23.9.0"
@@ -16,4 +17,4 @@ repos:
       - id: isort
         name: isort (python)
         args: ["--profile", "black", "--filter-files"]
-        exclude: (migrations)
+        exclude: migrations

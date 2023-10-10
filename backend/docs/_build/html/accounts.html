@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>accounts package &mdash; SoC Portal Documentation 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+</head>
+
+<body class="wy-body-for-nav">
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+
+          <a href="index.html" class="icon icon-home">
+            SoC Portal Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">accounts package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#accounts-admin-module">accounts.admin module</a></li>
+<li><a class="reference internal" href="#accounts-apps-module">accounts.apps module</a></li>
+<li><a class="reference internal" href="#accounts-custom-auth-module">accounts.custom_auth module</a></li>
+<li><a class="reference internal" href="#accounts-forms-module">accounts.forms module</a></li>
+<li><a class="reference internal" href="#accounts-models-module">accounts.models module</a></li>
+<li><a class="reference internal" href="#accounts-serializers-module">accounts.serializers module</a></li>
+<li><a class="reference internal" href="#accounts-tests-module">accounts.tests module</a></li>
+<li><a class="reference internal" href="#accounts-urls-module">accounts.urls module</a></li>
+<li><a class="reference internal" href="#accounts-views-module">accounts.views module</a></li>
+<li><a class="reference internal" href="#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SoC Portal Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">accounts package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/accounts.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <section id="accounts-package">
+<h1>accounts package<a class="headerlink" href="#accounts-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="accounts-admin-module">
+<h2>accounts.admin module<a class="headerlink" href="#accounts-admin-module" title="Link to this heading"></a></h2>
+</section>
+<section id="accounts-apps-module">
+<h2>accounts.apps module<a class="headerlink" href="#accounts-apps-module" title="Link to this heading"></a></h2>
+</section>
+<section id="accounts-custom-auth-module">
+<h2>accounts.custom_auth module<a class="headerlink" href="#accounts-custom-auth-module" title="Link to this heading"></a></h2>
+</section>
+<section id="accounts-forms-module">
+<h2>accounts.forms module<a class="headerlink" href="#accounts-forms-module" title="Link to this heading"></a></h2>
+</section>
+<section id="accounts-models-module">
+<h2>accounts.models module<a class="headerlink" href="#accounts-models-module" title="Link to this heading"></a></h2>
+<p>class UserCreationForm</p>
+<p>Has fields roll number and email (basic info to create a user)</p>
+<p>def _create_user</p>
+<p>Create and save a user with the given roll number, email, and password.</p>
+<p>class User</p>
+<p>Users within the Django authentication system are represented by this
+model.
+Roll_number and password are required. Other fields are optional.</p>
+</section>
+<section id="accounts-serializers-module">
+<h2>accounts.serializers module<a class="headerlink" href="#accounts-serializers-module" title="Link to this heading"></a></h2>
+<p>def validate_password</p>
+<p>Validate the password against all password validators.</p>
+<p>def create</p>
+<p>Override the create mehtod with objects.create_user,
+since the former saves with an unencrypted password</p>
+<p>class UserAutoCompleteSerializer</p>
+<p>To automatcally complete User’s name</p>
+</section>
+<section id="accounts-tests-module">
+<h2>accounts.tests module<a class="headerlink" href="#accounts-tests-module" title="Link to this heading"></a></h2>
+</section>
+<section id="accounts-urls-module">
+<h2>accounts.urls module<a class="headerlink" href="#accounts-urls-module" title="Link to this heading"></a></h2>
+</section>
+<section id="accounts-views-module">
+<h2>accounts.views module<a class="headerlink" href="#accounts-views-module" title="Link to this heading"></a></h2>
+</section>
+<section id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, WnCC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+</body>
+</html>

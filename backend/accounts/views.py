@@ -3,21 +3,30 @@ import re
 from django.db.models import Value as V
 from django.db.models.functions import Concat
 from rest_framework import generics
-from backend.settings import SIMPLE_JWT
-from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import IsAuthenticated as isAuthenticated
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+from backend.settings import SIMPLE_JWT
+
 from .models import User
 from .serializers import RegisterUserSerializer, UserAutoCompleteSerializer
 
 
 class RegisterUserView(generics.CreateAPIView):
+    """
+    CreateAPIView that handles user registration
+    """
+
     permission_classes = []
     serializer_class = RegisterUserSerializer
 
 
 class UserListView(generics.ListAPIView):
+    """
+    ListAPIView to access user data, for user searching
+    """
+
     serializer_class = UserAutoCompleteSerializer
-    permission_classes= [isAuthenticated]
 
     def get_queryset(self):
         queryset = User.objects.all()
@@ -34,7 +43,7 @@ class UserListView(generics.ListAPIView):
                     queryset = queryset.filter(full_name__icontains=term)
 
         return queryset[:10]
-    
+
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
@@ -45,4 +54,3 @@ class CustomTokenObtainPairView(TokenObtainPairView):
                 key=SIMPLE_JWT["AUTH_COOKIE"], value=access_token, httponly=True
             )
         return response
-

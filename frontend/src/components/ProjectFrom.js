@@ -15,9 +15,6 @@ export default function ProjectForm(){
         roll_number : '',
     })
 
-    // const rollnumberFound(roll_number){
-        
-    // }
 
     const handleChange = (e) => {
         const {id,value} = e.target;
@@ -53,7 +50,6 @@ export default function ProjectForm(){
                     <input id='roll_number' onChange={handleChange} />
                     <button onClick={handleSubmit}>
                         Search
-
                     </button>
                 </label>
                 <br></br>

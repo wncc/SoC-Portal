@@ -5,5 +5,6 @@ from .serializers import ProjectSerializer
 
 
 class ProjectListView(generics.ListAPIView):
+    permission_classes = []
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
