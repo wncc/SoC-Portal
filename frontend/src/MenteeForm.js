@@ -115,7 +115,7 @@ export default function MenteeForm() {
                 <button onClick={role1} className='btn'>Mentor</button>
                 {/* Labels and inputs for form data */}
                 <label className="label">Name</label>
-                <input id='name' onChange={handleProfile} className="input"
+                <input id='first_name' onChange={handleProfile} className="input"
                      type="text" />
 
                 <label className="label">Roll Number</label>

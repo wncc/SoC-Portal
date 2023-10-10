@@ -52,7 +52,7 @@ export default function Navbar(props){
                 {}
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/previous_projects">Previous Projects</a>
+                <a className="nav-link" href="/previous_projects">Login</a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/">Past Certificates</a>
