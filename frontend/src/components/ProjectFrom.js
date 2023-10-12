@@ -50,7 +50,7 @@ export default function ProjectForm(){
                 <input type='text' />
                 <br></br>
                 <label>
-                    <input id='roll_number'  type='search' />
+                    <input id='roll_number'  type='search' placeholder="Enter Roll number"/>
                     <button onClick={handleSubmit}>
                         Search
                     </button>
