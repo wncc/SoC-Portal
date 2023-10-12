@@ -10,3 +10,9 @@
     margin-left: 16px;
     margin-right: 16px;
 }
+
+.searchbar{
+    background-color: white;
+    height:auto ;
+    width: auto;
+}

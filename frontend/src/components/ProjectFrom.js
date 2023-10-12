@@ -1,6 +1,9 @@
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
+import MyComponent from "./MyComponent";
+import MyComponent2 from "./MyComponent2";
+
 
 
 export default function ProjectForm(){
@@ -18,25 +21,25 @@ export default function ProjectForm(){
 
     const handleChange = (e) => {
         const {id,value} = e.target;
-        console.log(roll_number)
+        // console.log(roll_number)
         setRoll_number((prevRoll_number) => ({
             ...prevRoll_number,
             [id]: value,
           }));
     }
 
+    // const [toggle,setToggle] = useState(false)
+    // const [anyone,setAnyone] = useState(false)
+
     const handleSubmit = (e) => {
         // console.log(roll_number)
         e.preventDefault();
         axios.get('/api/accounts/',roll_number)
         .then( function(roll_number){
-            // console.log(roll_number)
-            if(roll_number.status === 200){
-                console.log(roll_number,"found")
-            }
+            console.log(roll_number.data[0].roll_number)
         })
         .catch( err =>{
-
+            alert(err);
         })
     }
     return (
@@ -47,11 +50,14 @@ export default function ProjectForm(){
                 <input type='text' />
                 <br></br>
                 <label>
-                    <input id='roll_number' onChange={handleChange} />
+                    <input id='roll_number'  type='search' />
                     <button onClick={handleSubmit}>
                         Search
                     </button>
+                    {/* {toggle && <MyComponent text="roll_number"/>} */}
+                    {/* {anyone && <MyComponent2 />} */}
                 </label>
+
                 <br></br>
                 <label>
                     Title your project idea   
@@ -86,7 +92,6 @@ export default function ProjectForm(){
                         </label>
                         <br></br>
                         <br></br>
-                        
                 </div>   
                 <label>
                     <input type='text'/>
