@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
-import MyComponent from "./MyComponent";
-import MyComponent2 from "./MyComponent2";
+import MyComponent from "../components/MyComponent";
+import MyComponent2 from "../components/MyComponent2";
 
 
 
@@ -14,18 +14,11 @@ export default function ProjectForm(){
 
     })
 
-    const [roll_number,setRoll_number] = useState({
-        roll_number : '',
-    })
+    const [roll_number,setRoll_number] = useState()
 
 
-    const handleChange = (e) => {
-        const {id,value} = e.target;
-        // console.log(roll_number)
-        setRoll_number((prevRoll_number) => ({
-            ...prevRoll_number,
-            [id]: value,
-          }));
+    const handleRollNumberChange = (e) => {
+        setRoll_number(e.target.value);
     }
 
     // const [toggle,setToggle] = useState(false)
@@ -34,9 +27,10 @@ export default function ProjectForm(){
     const handleSubmit = (e) => {
         // console.log(roll_number)
         e.preventDefault();
-        axios.get('/api/accounts/',roll_number)
+        console.log(roll_number)
+        axios.get('/api/accounts/'+'?search='+roll_number)
         .then( function(roll_number){
-            console.log(roll_number.data[0].roll_number)
+            console.log(roll_number.data)
         })
         .catch( err =>{
             alert(err);
@@ -50,7 +44,7 @@ export default function ProjectForm(){
                 <input type='text' />
                 <br></br>
                 <label>
-                    <input id='roll_number'  type='search' />
+                    <input id='roll_number'  type='search' onChange={handleRollNumberChange}/>
                     <button onClick={handleSubmit}>
                         Search
                     </button>

@@ -1,5 +1,5 @@
 import React from "react";
-import ProjectForm from "./ProjectFrom";
+import ProjectForm from "../pages/ProjectFrom";
 import './scrollable.css'
 
 

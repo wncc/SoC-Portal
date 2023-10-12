@@ -34,7 +34,7 @@ class UserListView(generics.ListAPIView):
 
         if query is not None and query != "":
             if re.search(r"\d", query):
-                queryset = queryset.filter(roll_number__istarts_with=query)
+                queryset = queryset.filter(roll_number__iexact=query)
             else:
                 queryset = queryset.annotate(
                     full_name=Concat("first_name", V(" "), "last_name")
