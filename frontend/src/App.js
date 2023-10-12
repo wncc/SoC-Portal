@@ -1,6 +1,5 @@
 import './App.css';
 import React from 'react';
-import MenteeForm from "./MenteeForm"
 import Navbar from './components/Navbar';
 import Textform from './components/Textform';
 import Reviews from './components/Reviews';
@@ -11,7 +10,8 @@ import Button from './components/Button';
 import { Routes, Route } from "react-router-dom";
 import Dashboard from './components/Dashboard';
 import ProjectCard from './components/ProjectCard';
-import ProjectForm from './components/ProjectFrom';
+import ProjectForm from './pages/ProjectFrom';
+import Register from './pages/Register';
 
 
 export default function App() {
@@ -21,7 +21,7 @@ export default function App() {
         <Navbar title="SOC" />
         <Routes>
           <Route path="/" element={<Textform />} />
-          <Route path="/register" element={<MenteeForm />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login/>}/>
           <Route path="/current_projects" element={<Projects/>}/>
           {/* <Route path="/course" element={<Courses />} />

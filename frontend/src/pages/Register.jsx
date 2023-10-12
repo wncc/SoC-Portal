@@ -1,13 +1,15 @@
 import { useState } from 'react';
+import axios from 'axios';
 
-export default function MenteeForm() {
+export default function Register() {
 
     // States for registration
     // role: 1 for mentor, 0 for mentee
     const [profile, setProfile] = useState({
         role: '0',
-        name: '',
-        roll: '',
+        first_name: '',
+        last_name: '',
+        roll_number: '',
         phone: '',
         email: '',
         password: '',
@@ -32,13 +34,21 @@ export default function MenteeForm() {
     const handleSubmit = (e) => {
         console.log(profile);
         e.preventDefault();
-        if (profile.name === '' || profile.email === '' || profile.password === '' || profile.phone === '' || profile.roll === '') {
+        if (profile.first_name === '' ||profile.last_name === '' || profile.email === '' || profile.password === '' || profile.phone === '' || profile.roll_number === '') {
             setError(true);
         } else {
             setSubmitted(true);
             setError(false);
         }
+        axios.post('api/accounts/register/',profile)
+        .then(res =>{
+            window.location.href = '/'
+            console.log(res)
+        })
+        .catch(err => console.log(err))
     };
+
+
 
     const role0 = () => {
         profile.role = 0;
@@ -84,7 +94,12 @@ export default function MenteeForm() {
         );
     };
 
+
+
     return (
+
+
+
         <div className="form">
             <div>
                 <h1>SoC Registration</h1>
@@ -96,16 +111,16 @@ export default function MenteeForm() {
                 {successMessage()}
             </div>
 
-            <form>
+            <form onSubmit={handleSubmit}>
                 <button onClick={role0} className='btn' defaultChecked>Mentee</button>
                 <button onClick={role1} className='btn'>Mentor</button>
                 {/* Labels and inputs for form data */}
                 <label className="label">Name</label>
-                <input id='name' onChange={handleProfile} className="input"
+                <input id='first_name' onChange={handleProfile} className="input"
                      type="text" />
 
                 <label className="label">Roll Number</label>
-                <input id = 'roll' onChange={handleProfile} className="input"
+                <input id = 'roll_number' onChange={handleProfile} className="input"
                      type="text" />
 
                 <label className="label">Phone Number (WhatsApp)</label>
@@ -120,7 +135,7 @@ export default function MenteeForm() {
                 <input id = 'password' onChange={handleProfile} className="input"
                      type="password" />
 
-                <button onClick={handleSubmit} className="btn"
+                <button className="btn"
                         type="submit">
                     Register
                 </button>
