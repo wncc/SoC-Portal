@@ -11,11 +11,11 @@ export default function ProjectForm(){
     const [projectlist , setProjectlist] = useState({
         title : '',
         cateogary : '',
-        project_description : '',
-        project_url : '',
-        project_image : '',
-        project_date : '',
-        project_time : '',
+        mentee_min : '',
+        mentee_max : '',
+        description : '',
+        timeline : '',
+        banner_image : '',
 
     })
 
@@ -65,61 +65,47 @@ export default function ProjectForm(){
                 <br></br>
                 <div>
                         <h3>Project Cateogary</h3>
-                            {/* <label>
-                                <input type='radio' name="item" id='cateogary' />
-                                App Development
-                            </label> 
-                            <br></br>
-                            <label>
-                                <input type='radio' name="item" id='cateogary'/>
-                                Web Development
-                            </label> 
-                            <br></br>
-                            <label>
-                                <input type='radio' name="item" id='cateogary'/>
-                                Web Development
-                            </label> 
-                            <br></br>
-                            <label>
-                                <input type='radio' name="item" id='cateogary'/>
-                                Blockchain Development
-                            </label>
-                            <br></br>
-                            <label>
-                                <input type='radio' name="item" id='cateogary'/>
-                                Machine Learning
-                            </label> */}
                             <label>
                                 Select an option:
-                                <select name="option">
-                                <option value="App Development">App Development</option>
-                                <option value="Web Development">Web Development</option>
-                                <option value="Game Development">Game Development</option>
-                                <option value="Blockchain Development">Blockchain Development</option>
-                                <option value="Machine Learning">Machine Learning</option>
+                                <select name="option" id='cateogary'>
+                                <option value="WEB3">WEB3</option>
+                                <option value="AIML">AIML</option>
+                                <option value="DEV">DEV</option>
+                                <option value="CP">CP</option>
+                                <option value="MISC">MISC</option>
                                 </select>
                             </label>
                         <br></br>
                         <br></br>
                 </div>   
                 <label>
-                    <input type='text'/>
+                    <input type='text' id='description'/>
                     Description of the project
                 </label>  
                 <br></br>
                 <label>
-                    <input type='number'/>
-                    number of mentees you need
+                    <input type='number' id='mentee_min'/>
+                    minimum number of mentees
+                </label> 
+                <br></br>
+                <label>
+                    <input type='number' id='mentee_max'/>
+                    maximum number of mentees
                 </label> 
                 <br></br>
                 <label>
                     Prereqisite of the mentees(if any)
-                    <input type ='text'/>
+                    <input type ='text' id='abstract'/>
+                </label>
+                <br></br>
+                <label>
+                    timeline(if any)
+                    <input type ='text' id='timeline'/>
                 </label>
                 <br></br>
                 <label>
                     upload the banner of the project (as pdf)
-                    <input type='pdffile'/>
+                    <input type='file'id='banner_image'/>
                 </label>
             </form>
         </>
