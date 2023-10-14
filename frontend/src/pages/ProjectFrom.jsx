@@ -9,8 +9,13 @@ import MyComponent2 from "../components/MyComponent2";
 export default function ProjectForm(){
 
     const [projectlist , setProjectlist] = useState({
-        project_name : '',
-        project_type : '',
+        title : '',
+        cateogary : '',
+        project_description : '',
+        project_url : '',
+        project_image : '',
+        project_date : '',
+        project_time : '',
 
     })
 
@@ -41,7 +46,7 @@ export default function ProjectForm(){
             <h1>Project Form</h1>
             <form>
                 <label>Project Title</label>
-                <input type='text' />
+                <input type='text' id='title'/>
                 <br></br>
                 <label>
                     <input id='roll_number'  type='search' onChange={handleRollNumberChange}/>
@@ -60,30 +65,40 @@ export default function ProjectForm(){
                 <br></br>
                 <div>
                         <h3>Project Cateogary</h3>
-                        <label>
-                            <input type='radio' name="item" />
-                            App Development
-                        </label> 
-                        <br></br>
-                        <label>
-                            <input type='radio' name="item" />
-                            Web Development
-                        </label> 
-                        <br></br>
-                        <label>
-                            <input type='radio' name="item"/>
-                            Game Development
-                        </label> 
-                        <br></br>
-                        <label>
-                            <input type='radio' name="item"/>
-                            Blockchain Development
-                        </label>
-                        <br></br>
-                        <label>
-                            <input type='radio' name="item"/>
-                            Machine Learning
-                        </label>
+                            {/* <label>
+                                <input type='radio' name="item" id='cateogary' />
+                                App Development
+                            </label> 
+                            <br></br>
+                            <label>
+                                <input type='radio' name="item" id='cateogary'/>
+                                Web Development
+                            </label> 
+                            <br></br>
+                            <label>
+                                <input type='radio' name="item" id='cateogary'/>
+                                Web Development
+                            </label> 
+                            <br></br>
+                            <label>
+                                <input type='radio' name="item" id='cateogary'/>
+                                Blockchain Development
+                            </label>
+                            <br></br>
+                            <label>
+                                <input type='radio' name="item" id='cateogary'/>
+                                Machine Learning
+                            </label> */}
+                            <label>
+                                Select an option:
+                                <select name="option">
+                                <option value="App Development">App Development</option>
+                                <option value="Web Development">Web Development</option>
+                                <option value="Game Development">Game Development</option>
+                                <option value="Blockchain Development">Blockchain Development</option>
+                                <option value="Machine Learning">Machine Learning</option>
+                                </select>
+                            </label>
                         <br></br>
                         <br></br>
                 </div>   
