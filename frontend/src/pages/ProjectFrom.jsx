@@ -8,54 +8,55 @@ import MyComponent2 from "../components/MyComponent2";
 
 export default function ProjectForm(){
 
-    const [projectlist , setProjectlist] = useState({
-        project_name : '',
-        project_type : '',
+    const [projectdata , setProjectdata] = useState({
 
     })
 
-    const [roll_number,setRoll_number] = useState()
-
 
     const handleRollNumberChange = (e) => {
-        setRoll_number(e.target.value);
-    }
-
-    // const [toggle,setToggle] = useState(false)
-    // const [anyone,setAnyone] = useState(false)
-
-    const handleSubmit = (e) => {
-        // console.log(roll_number)
-        e.preventDefault();
-        console.log(roll_number)
-        axios.get('/api/accounts/'+'?search='+roll_number)
+        var roll = e.target.value ? e.target.value : null;
+        if(roll === null) return;
+        axios.get('/api/accounts/'+'?search='+roll)
         .then( function(roll_number){
-            console.log(roll_number.data)
-        })
+            
+            if(roll_number.data.length === 0){
+                alert("No such user exists")
+                e.target.style.backgroundColor = 'red';
+
+            }
+            else{
+                e.target.style.backgroundColor = 'green';
+            }
+                
+            })
         .catch( err =>{
             alert(err);
         })
+        
+    }
+
+    const handleRollSubmit = (e) => {
+        e.preventDefault();
+        
     }
     return (
         <>
             <h1>Project Form</h1>
             <form>
                 <label>Project Title</label>
-                <input type='text' />
+                <input type='text' required/>
                 <br></br>
                 <label>
-                    <input id='roll_number'  type='search' onChange={handleRollNumberChange}/>
-                    <button onClick={handleSubmit}>
-                        Search
-                    </button>
-                    {/* {toggle && <MyComponent text="roll_number"/>} */}
-                    {/* {anyone && <MyComponent2 />} */}
+                    Co Mentors 
+                    <input type='text' placeholder="Co-Mentor-1 RollNumber" onBlur={handleRollNumberChange}/>
+                    <input type='text' placeholder="Co-Mentor-2 RollNumber" onBlur={handleRollNumberChange}/>
+
                 </label>
 
                 <br></br>
                 <label>
                     Title your project idea   
-                    <input  type='text' />
+                    <input  type='text' requried/>
                 </label>
                 <br></br>
                 <div>
