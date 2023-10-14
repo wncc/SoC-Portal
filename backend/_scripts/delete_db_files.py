@@ -2,6 +2,9 @@ import os
 import shutil
 from pathlib import Path
 
+# import os
+# from django.core.management import call_command
+
 
 def delete_migration_files(app_name):
     migrations_folder = Path(app_name) / "migrations"
@@ -41,7 +44,11 @@ if __name__ == "__main__":
     for app_name in django_apps:
         # Delete migration files for each app
         delete_migration_files(app_name)
+        print(f"Deleted migrations in {app_name}")
 
     # Delete SQLite DB using a relative path
     db_path = "db.sqlite3"  # Relative path from the current working directory
     delete_sqlite_db(db_path)
+
+    # call_command("makemigrations")
+    # call_command("migrate")
