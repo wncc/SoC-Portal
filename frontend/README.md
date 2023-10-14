@@ -29,4 +29,8 @@ This project aims at creating a functional, user-friendly portal for WnCC's annu
 
 You can find more such improvements in issues on which you can contribute.
 
+## Set Up on MAC OS
+-First step is to clone the repository to your system using the commadb
+
+
 <p align="center">Created with :heart: by <a href="https://itc.gymkhana.iitb.ac.in/wncc/">WnCC</a></p>
