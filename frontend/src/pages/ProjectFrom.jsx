@@ -8,7 +8,14 @@ import MyComponent2 from "../components/MyComponent2";
 
 export default function ProjectForm(){
 
-    const [projectdata , setProjectdata] = useState({
+    const [projectlist , setProjectlist] = useState({
+        title : '',
+        cateogary : '',
+        mentee_min : '',
+        mentee_max : '',
+        description : '',
+        timeline : '',
+        banner_image : '',
 
     })
 
@@ -44,7 +51,7 @@ export default function ProjectForm(){
             <h1>Project Form</h1>
             <form>
                 <label>Project Title</label>
-                <input type='text' required/>
+                <input type='text' id='title'/>
                 <br></br>
                 <label>
                     Co Mentors 
@@ -61,51 +68,47 @@ export default function ProjectForm(){
                 <br></br>
                 <div>
                         <h3>Project Cateogary</h3>
-                        <label>
-                            <input type='radio' name="item" />
-                            App Development
-                        </label> 
-                        <br></br>
-                        <label>
-                            <input type='radio' name="item" />
-                            Web Development
-                        </label> 
-                        <br></br>
-                        <label>
-                            <input type='radio' name="item"/>
-                            Game Development
-                        </label> 
-                        <br></br>
-                        <label>
-                            <input type='radio' name="item"/>
-                            Blockchain Development
-                        </label>
-                        <br></br>
-                        <label>
-                            <input type='radio' name="item"/>
-                            Machine Learning
-                        </label>
+                            <label>
+                                Select an option:
+                                <select name="option" id='cateogary'>
+                                <option value="WEB3">WEB3</option>
+                                <option value="AIML">AIML</option>
+                                <option value="DEV">DEV</option>
+                                <option value="CP">CP</option>
+                                <option value="MISC">MISC</option>
+                                </select>
+                            </label>
                         <br></br>
                         <br></br>
                 </div>   
                 <label>
-                    <input type='text'/>
+                    <input type='text' id='description'/>
                     Description of the project
                 </label>  
                 <br></br>
                 <label>
-                    <input type='number'/>
-                    number of mentees you need
+                    <input type='number' id='mentee_min'/>
+                    minimum number of mentees
+                </label> 
+                <br></br>
+                <label>
+                    <input type='number' id='mentee_max'/>
+                    maximum number of mentees
                 </label> 
                 <br></br>
                 <label>
                     Prereqisite of the mentees(if any)
-                    <input type ='text'/>
+                    <input type ='text' id='abstract'/>
+                </label>
+                <br></br>
+                <label>
+                    timeline(if any)
+                    <input type ='text' id='timeline'/>
                 </label>
                 <br></br>
                 <label>
                     upload the banner of the project (as pdf)
-                    <input type='pdffile'/>
+                    <input type='file'id='banner_image'/>
                 </label>
             </form>
         </>
