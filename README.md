@@ -27,7 +27,7 @@ Create Virtual Environment:
   cd backend
   python3 -m venv venv
   ./venv/Scripts/Activate.ps1 # Windows
-                              # Linux/MacOS
+  source ./venv/bin/activate # Linux/MacOS
   pip3 install -r requirements.txt
 ```
 
