@@ -4,7 +4,8 @@
   "pk": 1,
   "fields": {
     "name": "WSOC 2023",
-    "is_active": true
+    "is_active": true,
+    "status": 2
   }
 },
 {
@@ -20,7 +21,8 @@
     "abstract": "Build a portal for Seasons of Code, involving both front-end and back-end design.",
     "description": "The Seasons of Code Portal project aims to create a comprehensive online platform tailored for coding enthusiasts participating in various \"Seasons of Code\" events. This project encompasses both front-end and back-end design to provide a seamless and engaging experience for users. Through a thoughtfully designed user interface and robust backend infrastructure, the portal seeks to enhance the overall coding experience for participants during different Seasons of Code.",
     "timeline": "Week 1: Define project scope and objectives.\r\nWeek 2: Set up version control. Create the project structure. Initialize front-end development environment.\r\nWeek 3: Implement user authentication. Start basic user profiles. Begin front-end UI design.\r\nWeek 4: Develop coding challenge functionalities. Implement submission and evaluation on the back-end.\r\nWeek 5: Implement leaderboards. Enhance real-time updates in the front-end.\r\nWeek 6: Implement community features. Develop discussion forums and chat in the front-end.\r\nWeek 7: Implement notification system. Create admin dashboard. Develop content moderation tools on the back-end.\r\nWeek 8: Conduct testing. Perform bug fixes. Optimize design and interactions. Ensure security and scalability. Finalize documentation for deployment",
-    "banner_image": "images/soc.png"
+    "banner_image": "images/soc.png",
+    "is_accepted" : false
   }
 },
 {
@@ -36,7 +38,8 @@
     "abstract": "Build a portal for Seasons of Code, involving both front-end and back-end design.",
     "description": "The Seasons of Code Portal project aims to create a comprehensive online platform tailored for coding enthusiasts participating in various \"Seasons of Code\" events. This project encompasses both front-end and back-end design to provide a seamless and engaging experience for users. Through a thoughtfully designed user interface and robust backend infrastructure, the portal seeks to enhance the overall coding experience for participants during different Seasons of Code.",
     "timeline": "Week 1: Define project scope and objectives.\r\nWeek 2: Set up version control. Create the project structure. Initialize front-end development environment.\r\nWeek 3: Implement user authentication. Start basic user profiles. Begin front-end UI design.\r\nWeek 4: Develop coding challenge functionalities. Implement submission and evaluation on the back-end.\r\nWeek 5: Implement leaderboards. Enhance real-time updates in the front-end.\r\nWeek 6: Implement community features. Develop discussion forums and chat in the front-end.\r\nWeek 7: Implement notification system. Create admin dashboard. Develop content moderation tools on the back-end.\r\nWeek 8: Conduct testing. Perform bug fixes. Optimize design and interactions. Ensure security and scalability. Finalize documentation for deployment",
-    "banner_image": "images/p_bannerNone.png"
+    "banner_image": "images/p_bannerNone.png",
+    "is_accepted" : false
   }
 },
 {
@@ -45,7 +48,7 @@
   "fields": {
     "mentor": 2,
     "project": 1,
-    "is_accepted": true
+    "status": 1
   }
 },
 {
@@ -54,7 +57,7 @@
   "fields": {
     "mentor": 1,
     "project": 2,
-    "is_accepted": true
+    "status": 1
   }
 },
 {
@@ -63,7 +66,7 @@
   "fields": {
     "mentor": 4,
     "project": 1,
-    "is_accepted": false
+    "status": 0
   }
 },
 {
@@ -72,7 +75,7 @@
   "fields": {
     "mentor": 3,
     "project": 1,
-    "is_accepted": false
+    "status": 0
   }
 }
 ]
