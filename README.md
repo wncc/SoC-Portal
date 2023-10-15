@@ -4,7 +4,7 @@
 
 #### This repository is a part of HelloFOSS '23
 
-An on-going project of the Web and Coding Club.
+An on-going project of the Web and Coding Club. Built using Django REST Framework and React.
 
 # Usage
 
@@ -18,21 +18,24 @@ Install JS packages
 
 ```shell
   cd frontend
-  # npm stuff here
+  npm install
 ```
 
 Create Virtual Environment:
 
 ```shell
   cd backend
-  python3 -m venv .venv
+  python3 -m venv venv
+  ./venv/Scripts/Activate.ps1 # Windows
+                              # Linux/MacOS
   pip3 install -r requirements.txt
 ```
 
 Run Application
 
 ```shell
-  # Frontend
+  # Frontend (in ./frontend/)
+  npm run start
   # Backend (in ./backend/)
   python manage.py runserver
 ```
