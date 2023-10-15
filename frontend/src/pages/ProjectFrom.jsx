@@ -9,104 +9,130 @@ import MyComponent2 from "../components/MyComponent2";
 export default function ProjectForm(){
 
     const [projectlist , setProjectlist] = useState({
-        project_name : '',
-        project_type : '',
+        title: '',
+        abc: '',
+        categary: '',
+        mentee_min: '',
+        mentee_max: '',
+        description: '',
+        timeline: '',
+        banner_image: '',
 
     })
 
-    const [roll_number,setRoll_number] = useState()
+    const detailsChange = (e) => {
+        const {id,value} = e.target
+        setProjectlist({
+          ...projectlist,
+            [id] : value,
+            // console.log(projectlist)
+        })
+        console.log('id:', id);
+        console.log('value:', value);
+    }
+
+    const detailsSubmit = (e) => {
+        console.log(projectlist)
+        axios.post('/api/dashboard/mentor/submit/',projectlist)
+        .then(res =>{
+            console.log(res)
+        }).catch(err =>
+             console.log(err))
+    }
 
 
     const handleRollNumberChange = (e) => {
-        setRoll_number(e.target.value);
-    }
-
-    // const [toggle,setToggle] = useState(false)
-    // const [anyone,setAnyone] = useState(false)
-
-    const handleSubmit = (e) => {
-        // console.log(roll_number)
-        e.preventDefault();
-        console.log(roll_number)
-        axios.get('/api/accounts/'+'?search='+roll_number)
+        var roll = e.target.value ? e.target.value : null;
+        if(roll === null) return;
+        axios.get('/api/accounts/'+'?search='+roll)
         .then( function(roll_number){
-            console.log(roll_number.data)
-        })
+            
+            if(roll_number.data.length === 0){
+                alert("No such user exists")
+                e.target.style.backgroundColor = 'red';
+
+
+            }
+            else{
+                e.target.style.backgroundColor = 'green';
+            }
+                
+            })
         .catch( err =>{
             alert(err);
         })
+        
+    }
+
+    const handleRollSubmit = (e) => {
+        e.preventDefault();
+        
     }
     return (
         <>
             <h1>Project Form</h1>
             <form>
                 <label>Project Title</label>
-                <input type='text' />
+                <input type='text' id='title' onChange={detailsChange}/>
                 <br></br>
                 <label>
-                    <input id='roll_number'  type='search' onChange={handleRollNumberChange}/>
-                    <button onClick={handleSubmit}>
-                        Search
-                    </button>
-                    {/* {toggle && <MyComponent text="roll_number"/>} */}
-                    {/* {anyone && <MyComponent2 />} */}
+                    Co Mentors 
+                    <input type='text' placeholder="Co-Mentor-1 RollNumber" onBlur={handleRollNumberChange}/>
+                    <input type='text' placeholder="Co-Mentor-2 RollNumber" onBlur={handleRollNumberChange}/>
+
                 </label>
 
                 <br></br>
                 <label>
                     Title your project idea   
-                    <input  type='text' />
+                    <input  type='text' id='abc' requried onChange={detailsChange}/>
                 </label>
                 <br></br>
                 <div>
                         <h3>Project Cateogary</h3>
-                        <label>
-                            <input type='radio' name="item" />
-                            App Development
-                        </label> 
-                        <br></br>
-                        <label>
-                            <input type='radio' name="item" />
-                            Web Development
-                        </label> 
-                        <br></br>
-                        <label>
-                            <input type='radio' name="item"/>
-                            Game Development
-                        </label> 
-                        <br></br>
-                        <label>
-                            <input type='radio' name="item"/>
-                            Blockchain Development
-                        </label>
-                        <br></br>
-                        <label>
-                            <input type='radio' name="item"/>
-                            Machine Learning
-                        </label>
+                        <select id='categary' onChange={detailsChange}>
+                            <option value="WEB3">WEB3</option>
+                            <option value="AIML">AIML</option>
+                            <option value="DEV">DEV</option>
+                            <option value="CP">CP</option>
+                            <option value="MISC">MISC</option>
+                        </select>
                         <br></br>
                         <br></br>
                 </div>   
                 <label>
-                    <input type='text'/>
+                    <input type='text' id='description' onChange={detailsChange}/>
                     Description of the project
                 </label>  
                 <br></br>
                 <label>
-                    <input type='number'/>
-                    number of mentees you need
+                    <input type='number' id='mentee_min' onChange={detailsChange}/>
+                    minimum number of mentees
+                </label> 
+                <br></br>
+                <label>
+                    <input type='number' id='mentee_max' onChange={detailsChange}/>
+                    maximum number of mentees
                 </label> 
                 <br></br>
                 <label>
                     Prereqisite of the mentees(if any)
-                    <input type ='text'/>
+                    <input type ='text' id='abstract' onChange={detailsChange}/>
+                </label>
+                <br></br>
+                <label>
+                    timeline(if any)
+                    <input type ='text' id='timeline' onChange={detailsChange}/>
                 </label>
                 <br></br>
                 <label>
                     upload the banner of the project (as pdf)
-                    <input type='pdffile'/>
+                    <input type='file'id='banner_image' onChange={detailsChange}/>
                 </label>
             </form>
+            <button onClick={detailsSubmit}>
+                Submit Project
+            </button>
         </>
     )
 }
