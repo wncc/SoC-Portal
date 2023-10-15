@@ -44,6 +44,17 @@ Run Application
 
 ## Frontend
 
+This project generates documentation using [StoryBook](https://www.npmjs.com/package/@storybook/react). Make sure that you add JSDoc comments for the components. To access the documentation, run the following commands on your terminal:
+
+```bash
+# installation
+npm install --save-dev @storybook/react
+# configuration
+npx sb init
+# to view the documentation
+npx storybook
+```
+
 ## Backend
 
 The project generates API documentation using [drf-yasg](https://github.com/axnsan12/drf-yasg), provided through Swagger and ReDoc. To access the API documentation, follow these steps:
