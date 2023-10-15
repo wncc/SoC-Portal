@@ -6,6 +6,9 @@
 
 An on-going project of the Web and Coding Club. Built using Django REST Framework and React.
 
+# Getting Started
+
+To learn the usage of this repository and begin contributing go to the **Usage** section of [CONTRIBUTING.md](CONTRIBUTING.md)
 
 
 # Documentation

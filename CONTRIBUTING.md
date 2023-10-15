@@ -45,3 +45,23 @@ Run Application
   # Backend (in ./backend/)
   python manage.py runserver
 ```
+
+# Resources
+
+## Backend
+Django - https://docs.djangoproject.com/en/4.2/
+
+Django-Rest Framework - https://www.django-rest-framework.org/
+
+Simple JWT - https://django-rest-framework-simplejwt.readthedocs.io/en/latest/
+
+## Frontend
+
+React Framework - https://legacy.reactjs.org/docs/getting-started.html
+
+JavaScript - https://javascript.info/
+
+React Router - https://reactrouter.com/en/main
+
+Axios - https://github.com/axios/axios
+
