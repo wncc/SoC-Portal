@@ -2,13 +2,7 @@ If you would like to contribute to the project, please follow these guidelines:
 
 1. Fork the repository.
    > If you've already cloned the repo using the commands from the [README's Usage section](./README.md#usage), you can set the remote origin to point to your forked GitHub repository.
-   >
-   > ```shell
-   > # Rename old origin
-   > git remote rename origin upstream
-   > # Add new origin. Link is to your fork of the repo
-   > git remote add origin https://github.com/<username>/<fork-name>
-   > ```
+   > Remember to also add the original repo as a remote branch under a different name (ex. upstream) to fetch changes made to the original
 2. Create a new branch for your feature or bug fix.
 
 3. Make the necessary changes and commit them.
