@@ -11,7 +11,7 @@ An on-going project of the Web and Coding Club. Built using Django REST Framewor
 Clone the Git repository:
 
 ```shell
-  git clone https://github.com/wncc/SoC-Portal/tree/main
+  git clone https://github.com/wncc/SoC-Portal.git
 ```
 
 Install JS packages
