@@ -46,6 +46,14 @@ class Season(models.Model):
     is_active = models.BooleanField(default=False)
     objects = SeasonManager()
 
+    class StatusChoices(models.IntegerChoices):
+        YET_TO_START = 0
+        MENTOR_REGISTRATION = 2
+        MENTEE_REGISTRATION = 4
+        ONGOING = 6
+
+    status = models.IntegerField(default=0, choices=StatusChoices.choices)
+
     def __str__(self):
         return self.name
 
@@ -90,6 +98,7 @@ class Project(models.Model):
     description = models.TextField()
     timeline = models.TextField()
     banner_image = models.ImageField(upload_to=upload_to, blank=True, null=True)
+    is_accepted = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
@@ -103,4 +112,13 @@ class MentorRequest(models.Model):
 
     mentor = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    is_accepted = models.BooleanField(default=False)
+
+    class RequestStatusChoices(models.IntegerChoices):
+        PENDING = 0b00
+        FIRST_MENTOR = 0b01
+        REJECTED = 0b10
+        ACCEPTED = 0b11
+
+    status = models.IntegerField(
+        choices=RequestStatusChoices.choices, default=RequestStatusChoices.PENDING
+    )

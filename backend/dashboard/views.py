@@ -1,8 +1,26 @@
-from projects.models import Season
-from rest_framework import generics
+from projects.models import MentorRequest, Season
+from rest_framework import generics, views
 
 from .models import Mentee
-from .serializers import MenteeSerializer, ProjectAdditionSerializer
+from .serializers import (
+    MenteeSerializer,
+    MentorRequestSerializer,
+    ProjectAdditionSerializer,
+)
+
+
+class DashboardView(generics.ListAPIView):
+    def get_queryset(self):
+        current_season = Season.objects.current()
+        status = current_season.status
+        if status == Season.StatusChoices.MENTOR_REGISTRATION:
+            return MentorRequest.objects.filter(mentor=self.request.user)
+
+    def get_serializer_class(self):
+        current_season = Season.objects.current()
+        status = current_season.status
+        if status == Season.StatusChoices.MENTOR_REGISTRATION:
+            return MentorRequestSerializer
 
 
 class ProjectSubmitView(generics.CreateAPIView):
