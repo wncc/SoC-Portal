@@ -11,7 +11,7 @@ An on-going project of the Web and Coding Club. Built using Django REST Framewor
 Clone the Git repository:
 
 ```shell
-  git clone https://github.com/wncc/SoC-Portal/tree/main
+  git clone https://github.com/wncc/SoC-Portal.git
 ```
 
 Install JS packages
@@ -27,7 +27,7 @@ Create Virtual Environment:
   cd backend
   python3 -m venv venv
   ./venv/Scripts/Activate.ps1 # Windows
-                              # Linux/MacOS
+  source ./venv/bin/activate # Linux/MacOS
   pip3 install -r requirements.txt
 ```
 
@@ -43,6 +43,17 @@ Run Application
 # Documentation
 
 ## Frontend
+
+This project generates documentation using [StoryBook](https://www.npmjs.com/package/@storybook/react). Make sure that you add JSDoc comments for the components. To access the documentation, run the following commands on your terminal:
+
+```bash
+# installation
+npm install --save-dev @storybook/react
+# configuration
+npx sb init
+# to view the documentation
+npx storybook
+```
 
 ## Backend
 
