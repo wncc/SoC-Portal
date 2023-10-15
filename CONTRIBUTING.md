@@ -10,3 +10,38 @@ If you would like to contribute to the project, please follow these guidelines:
 4. Push your changes to your forked repository.
 
 5. Submit a pull request to the main repository with your branch, explaining the changes you made and any additional information that might be helpful for review.
+
+# Usage
+
+Clone the Git repository:
+
+```shell
+  # Clone your fork of the GitHub Repo
+  git clone https://github.com/your_username/SoC-Portal.git
+```
+
+Install JS packages
+
+```shell
+  cd frontend
+  npm install
+```
+
+Create Virtual Environment:
+
+```shell
+  cd backend
+  python3 -m venv venv
+  ./venv/Scripts/Activate.ps1 # Windows
+  source ./venv/bin/activate # Linux/MacOS
+  pip3 install -r requirements.txt
+```
+
+Run Application
+
+```shell
+  # Frontend (in ./frontend/)
+  npm run start
+  # Backend (in ./backend/)
+  python manage.py runserver
+```
