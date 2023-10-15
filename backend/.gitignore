@@ -3,6 +3,7 @@
 
 # Ignore the virtual environment directory (if using virtualenv)
 venv/
+.venv/
 __pycache__/
 
 # Ignore the Django media and static files (if using Django's development server)
