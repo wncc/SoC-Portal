@@ -2,7 +2,7 @@ import ProjectCard from "../components/ProjectCard"
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
-import "./ProjectCard.css";
+import "../components/ProjectCard.css";
 
 export default function Projects() {
 
