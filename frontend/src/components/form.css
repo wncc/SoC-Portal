@@ -1,0 +1,78 @@
+/* Register.css */
+
+/* Styles for the main form container */
+.form {
+    max-width: 400px;
+    margin: 5vh auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+    background-color: #ffff;
+  }
+  
+  /* Styles for the form title */
+  .form h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Styles for buttons (Mentor/Mentee selection) */
+  .form .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  /* Styles for labels and input fields */
+  .form .label {
+    font-weight: bold;
+  }
+  
+  .form .input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Styles for error and success messages */
+  .form .error,.form  .success {
+    background-color: rgba(244, 67, 54); /* Red for errors */
+    color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .form .success {
+    background-color: #4CAF50; /* Green for success */
+  }
+  
+  /* Center buttons horizontally within the form */
+  .form .messages {
+    text-align: center;
+  }
+  
+  /* Additional styling for the submit button */
+  .form .btn[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+
+  /* Highlight the selected option */
+.form .active {
+    background-color: #2f00ff; /* Change the background color to your desired color */
+    color: #fff; /* Change the text color to match */
+  }
+  

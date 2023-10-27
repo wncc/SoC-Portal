@@ -7,6 +7,7 @@ export default function Login() {
     // States for registration
     // role: 1 for mentor, 0 for mentee
     const [profile, setProfile] = useState({
+        role: 0,    
         roll_number: '',
         password: '',
     });
@@ -97,8 +98,13 @@ export default function Login() {
             </div>
  
             <form onSubmit={handleSubmit}>
-                <button onClick={role0} className='btn' defaultChecked>Mentee</button>
-                <button onClick={role1} className='btn'>Mentor</button>
+                <button onClick={role0} className={`btn ${profile.role === 0 ? 'active' : ''}`} type="button">
+                    Mentee
+                </button>
+                <button onClick={role1} className={`btn ${profile.role === 1 ? 'active' : ''}`} type="button">
+                    Mentor
+                </button>
+                <br />
                 {/* Labels and inputs for form data */}
 
                 <label className="label">Roll Number</label>

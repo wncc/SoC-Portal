@@ -1,0 +1,65 @@
+.project_form {
+    max-width: 400px;
+    margin: 5vh auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    background: blur(100px);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .project_form h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .project_form form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .project_form label {
+    margin: 10px 0;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .project_form input[type="text"],
+  .project_form input[type="number"],
+  .project_form select,
+  .project_form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background: transparent;
+    color: #333;
+  }
+  
+  .project_form select {
+    appearance: none;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .project_form button {
+    margin: 20px 0;
+    padding: 10px 20px;
+    background-color: transparent;
+    border: 1px solid #007BFF;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #007BFF;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .project_form button:hover {
+    background-color: #007BFF;
+    color: #fff;
+  }
+  

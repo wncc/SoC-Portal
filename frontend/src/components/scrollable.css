@@ -13,12 +13,29 @@
     background-color: aqua;
     background-repeat: no-repeat;
     background-size: cover;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-.LinkCSS{
-    height: 50px;
-    width: 100px;
-    border: 2px solid black;
-    margin-left: 6px;
-    background-color: white;
-}
+.LinkCSS {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .LinkCSS a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ffff;
+    color: black;
+    text-decoration: none;
+    box-shadow: 3px 10px 10px rgba(0, 0, 0, .3);
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .LinkCSS a:hover {
+    background-color: #0056b3;
+  }
+  
