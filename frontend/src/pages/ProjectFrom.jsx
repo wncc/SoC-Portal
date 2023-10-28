@@ -25,7 +25,7 @@ export default function ProjectForm(){
         const {id,value} = e.target
         setProjectlist({
           ...projectlist,
-            [id] : value,
+            [id] :  value,
             // console.log(projectlist)
         })
         console.log('id:', id);
@@ -51,8 +51,6 @@ export default function ProjectForm(){
             if(roll_number.data.length === 0){
                 alert("No such user exists")
                 e.target.style.backgroundColor = 'red';
-
-
             }
             else{
                 e.target.style.backgroundColor = 'green';
@@ -75,57 +73,46 @@ export default function ProjectForm(){
             <form>
                 <label>Project Title</label>
                 <input type='text' id='title' onChange={detailsChange}/>
-                <br></br>
                 <label>
                     Co Mentors 
                     <input type='text' placeholder="Co-Mentor-1 RollNumber" onBlur={handleRollNumberChange}/>
                     <input type='text' placeholder="Co-Mentor-2 RollNumber" onBlur={handleRollNumberChange}/>
-
                 </label>
-
-                <br></br>
                 <label>
                     Title your project idea   
                     <input  type='text' id='abc' requried onChange={detailsChange}/>
                 </label>
-                <br></br>
-                <div>
-                        <h3>Project Cateogary</h3>
-                        <select id='categary' onChange={detailsChange}>
-                            <option value="WEB3">WEB3</option>
-                            <option value="AIML">AIML</option>
-                            <option value="DEV">DEV</option>
-                            <option value="CP">CP</option>
-                            <option value="MISC">MISC</option>
-                        </select>
-                        <br></br>
-                        <br></br>
-                </div>   
                 <label>
-                    <input type='text' id='description' onChange={detailsChange}/>
+                    Project Category
+                    <select id='categary' onChange={detailsChange}>
+                        <option value={0}>Select Category</option>
+                        <option value="WEB3">WEB3</option>
+                        <option value="AIML">AIML</option>
+                        <option value="DEV">DEV</option>
+                        <option value="CP">CP</option>
+                        <option value="MISC">MISC</option>
+                    </select>
+                </label>   
+                <label>
                     Description of the project
+                    <input type='text' id='description' onChange={detailsChange}/>
                 </label>  
-                <br></br>
                 <label>
-                    <input type='number' id='mentee_min' onChange={detailsChange}/>
                     minimum number of mentees
+                    <input type='number' id='mentee_min' onChange={detailsChange}/>
                 </label> 
-                <br></br>
                 <label>
-                    <input type='number' id='mentee_max' onChange={detailsChange}/>
                     maximum number of mentees
+                    <input type='number' id='mentee_max' onChange={detailsChange}/>
                 </label> 
-                <br></br>
                 <label>
                     Prereqisite of the mentees(if any)
                     <input type ='text' id='abstract' onChange={detailsChange}/>
                 </label>
-                <br></br>
                 <label>
-                    timeline(if any)
+                    Timeline(if any)
                     <input type ='text' id='timeline' onChange={detailsChange}/>
                 </label>
-                <br></br>
                 <label>
                     upload the banner of the project (as pdf)
                     <input type='file'id='banner_image' onChange={detailsChange}/>

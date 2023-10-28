@@ -7,13 +7,17 @@
     padding: 20px;
     border-radius: 5px;
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
-    background-color: #ffff;
-  }
+    background-color: rgba(255, 255, 255, 0.3);  }
   
   /* Styles for the form title */
   .form h1 {
     text-align: center;
     margin-bottom: 20px;
+    color: black;
+  }
+
+  .form input{
+    background-color: rgba(255, 255, 255, 0.3);
   }
   
   /* Styles for buttons (Mentor/Mentee selection) */
@@ -22,15 +26,17 @@
     padding: 10px 20px;
     margin: 5px;
     background-color: #007bff;
-    color: #fff;
+    background-color: rgba(255, 255, 255, 0.3);
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    width: 45%;
   }
   
   /* Styles for labels and input fields */
   .form .label {
-    font-weight: bold;
+    font-weight: 600;
+    margin: 10px 0 0 0;
   }
   
   .form .input {
@@ -38,7 +44,8 @@
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 5px; 
+    background-color: rgba(255, 255, 255, .8);
   }
   
   /* Styles for error and success messages */
@@ -61,12 +68,13 @@
   
   /* Additional styling for the submit button */
   .form .btn[type="submit"] {
-    background-color: #007bff;
+    background-color: #2f00ff;
     color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    width: 100%;
   }
   
 
