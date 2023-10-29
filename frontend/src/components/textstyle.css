@@ -1,15 +1,17 @@
+.textform{
+    color: #fff;
+    padding: 5vh 5vh;
+}
 .text{
     align-items: center;
     width: 500px;
     height: 200px;
     margin: auto;
     margin-top: 25px;
-    color: black;
 }
 
 .forSOC{
     align-items: center;
-    color: black;
 }
 
 .container1{

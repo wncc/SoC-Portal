@@ -4,7 +4,7 @@ import "./scrollable.css"
 
 export default function Textform(){
     return(
-    <>
+    <div className="textform">
         <div >
             <h2 class="forSOC">
                 What is SOC?
@@ -45,6 +45,6 @@ export default function Textform(){
                 Reviews
             </h2>
         </div>
-    </>
+    </div>
     )
 }

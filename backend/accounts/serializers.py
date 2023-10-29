@@ -25,6 +25,9 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         Override the create mehtod with objects.create_user,
         since the former saves with an unencrypted password
         """
+
+        # Normalize roll number to ensure uniformity
+        validated_data['roll_number'] = validated_data.get('roll_number', '').upper()
         return User.objects.create_user(**validated_data)
 
 
