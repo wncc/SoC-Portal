@@ -3,6 +3,7 @@ from rest_framework import serializers
 
 from .models import User
 
+latest_batch = 23
 
 class RegisterUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,6 +20,22 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         validate_password(password)
 
         return password
+    
+    def validate_roll_number(roll_number):
+        """
+        Validate the roll number against all the validators.
+        """
+        if len(roll_number) != 7:
+            return
+        try:
+            year = int(roll_number[:2])
+            sno = int(roll_number[3:])
+        except ValueError:
+            return
+        if (year > latest_batch or roll_number[2].lower() != "b"):
+            return
+        return roll_number
+
 
     def create(self, validated_data):
         """
