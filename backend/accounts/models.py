@@ -11,6 +11,9 @@ from django.utils import timezone
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
+    def normalize_roll_number(self, roll_number):
+        return roll_number.upper()
+
     def _create_user(self, roll_number, email, password, **extra_fields):
         """
         Create and save a user with the given roll number, email, and password.
@@ -18,6 +21,7 @@ class UserManager(BaseUserManager):
         if not roll_number:
             raise ValueError("The given roll number must be set")
         email = self.normalize_email(email)
+        roll_number = self.normalize_roll_number(roll_number)  
         user = self.model(roll_number=roll_number, email=email, **extra_fields)
         user.password = make_password(password)
         user.save(using=self._db)
