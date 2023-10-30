@@ -20,6 +20,15 @@ class RegisterUserSerializer(serializers.ModelSerializer):
 
         return password
 
+    
+    def validate_roll_number(self, roll_number):
+
+        if not is_valid_roll_number(roll_number):
+            raise serializers.ValidationError("Invalid roll number format")
+
+        return roll_number
+
+
     def create(self, validated_data):
         """
         Override the create mehtod with objects.create_user,
@@ -34,3 +43,9 @@ class UserAutoCompleteSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["id", "roll_number", "name"]
+
+
+
+def is_valid_roll_number(roll_number):
+    allowed_prefixes = ['18', '19', '20', '21', '22', '23']
+    return len(roll_number) >= 7 and roll_number[:2] in allowed_prefixes
