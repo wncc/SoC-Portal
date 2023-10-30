@@ -22,12 +22,23 @@ import {
 
 
 export default function Navbar(props){
+  const style = {
+    boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.75)",
+  }
 
     return(
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <nav className="navbar navbar-expand-lg bg-body-tertiary" style={style}>
         <div className="container-fluid">
           <a className="navbar-brand" href="/">{props.title}</a>
-          <button classNameName="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button 
+            classNameName="navbar-toggler" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#navbarSupportedContent" 
+            aria-controls="navbarSupportedContent" 
+            aria-expanded="false" 
+            aria-label="Toggle navigation"
+          >
             <span classNameName="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -47,7 +58,7 @@ export default function Navbar(props){
                 <a className="nav-link" href="/previous_projects">Login</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/">Past Certificates</a>
+                <a className="nav-link" href="https://itc.gymkhana.iitb.ac.in/certificates/">Past Certificates</a>
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -59,9 +70,6 @@ export default function Navbar(props){
                   <li><hr className="dropdown-divider"/></li>
                   <li><a classNameName="dropdown-item" href="/">Something else here</a></li>
                 </ul>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link disabled" aria-disabled="true" href="/">Disabled</a>
               </li>
             </ul>
             <form className="d-flex" role="search">

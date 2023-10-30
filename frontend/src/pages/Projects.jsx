@@ -21,13 +21,14 @@ export default function Projects() {
           });
       }, []);
 
-    return (<section className="project-card">
+    return (
+    <section className="project-card">
         <h1>Projects</h1>
+        
         {details.map((details,index)=>(
         <div key={index}>
             <ProjectCard link={details.banner_image} title={details.title} />
         </div>
         ))}
-
     </section>);
 }
