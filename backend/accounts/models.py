@@ -108,7 +108,19 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def clean(self):
         super().clean()
-        self.email = self.__class__.objects.normalize_email(self.email)
+        self.email = self._class_.objects.normalize_email(self.email)
+
+    def normalise_roll_number(roll_number):
+        """
+        Normalise the roll nummber by converting lowercase to uppercase.
+        """
+        normalised_roll_number = ""
+        for char in roll_number:
+            if not(char.isnumeric()):
+                normalised_roll_number += char.upper()
+            else:
+                normalised_roll_number += char
+        return normalised_roll_number
 
     def get_full_name(self):
         """
