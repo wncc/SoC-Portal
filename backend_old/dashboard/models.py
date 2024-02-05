@@ -20,12 +20,12 @@ class Mentee(models.Model):
         help_text="The season to which mentee is applying for.",
     )
 
-    project = models.ForeignKey(
-        Project,
-        null=True,
-        on_delete=models.SET_NULL,
-        help_text="The project that the mentee has been selected for. Is NULL if not selected yet.",
-    )
+    # project = models.ForeignKey(
+    #     Project,
+    #     null=True,
+    #     on_delete=models.SET_NULL,
+    #     help_text="The project that the mentee has been selected for. Is NULL if not selected yet.",
+    # )
 
     preferences = models.ManyToManyField(
         Project,
