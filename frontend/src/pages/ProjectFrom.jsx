@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import MyComponent from "../components/MyComponent";
 import MyComponent2 from "../components/MyComponent2";
+import '../components/project_form.css'
 
 
 
@@ -69,7 +70,7 @@ export default function ProjectForm(){
         
     }
     return (
-        <>
+        <div className="project_form">
             <h1>Project Form</h1>
             <form>
                 <label>Project Title</label>
@@ -133,6 +134,6 @@ export default function ProjectForm(){
             <button onClick={detailsSubmit}>
                 Submit Project
             </button>
-        </>
+        </div>
     )
 }
