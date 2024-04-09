@@ -1,6 +1,5 @@
 import React from "react";
 import "./comments.css"
-import PropTypes from "prop-types";
 
 export default function Reviews(props){
     return(
@@ -16,8 +15,4 @@ export default function Reviews(props){
     )
 }
 
-Reviews.defaultProps = {
-    Name : 'aaditya',
-    text : 'what he has to say',
-    value : '50'
-}
+
