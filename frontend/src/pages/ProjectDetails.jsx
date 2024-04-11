@@ -80,7 +80,9 @@ Prerequisites: None. Interest in image processing is appreciated. Basic knowledg
                     <p className='pt-3'>Prerequisites: BASIC PYTHON , (HTML OR STREAMLIT) , BASIC KNOWLEDGE OF NEURAL NETWORK, RNN</p>
                     {/* <p className='pt-3'>{details.prerequisites}</p> */}
                 </div>
-                {/* <ProjectTimeline/> */}
+                <div className="pt-5">
+                    <ProjectTimeline/>
+                </div>
             </div>
         </>
     );
