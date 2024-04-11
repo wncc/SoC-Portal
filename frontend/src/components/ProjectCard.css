@@ -1,4 +1,4 @@
-.project-cards {
+/* .project-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap: 20px;
@@ -34,4 +34,4 @@
 
 .project-card button:hover {
     background-color: #0069d9;
-}
+} */
