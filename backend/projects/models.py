@@ -72,33 +72,35 @@ def upload_to(instance, filename):
     return "projects/{filename}".format(filename=filename)
 
 
-class Mentor(models.Model):
-    """
-    A Mentor is the representation of a user in a season creating/heading projects.
-    """
+# Mentor Model Commented for now
 
-    user = models.ForeignKey(
-        UserProfile,
-        on_delete=models.CASCADE,
-        help_text="The user corresponding to the mentee.",
-    )
-    season = models.ForeignKey(
-        Season,
-        on_delete=models.PROTECT,
-        default=get_current_id,
-        help_text="The season to which mentee is applying for.",
-    )
+# class Mentor(models.Model):
+#     """
+#     A Mentor is the representation of a user in a season creating/heading projects.
+#     """
 
-    def __str__(self):
-        return self.user.roll_number
+#     user = models.ForeignKey(
+#         UserProfile,
+#         on_delete=models.CASCADE,
+#         help_text="The user corresponding to the mentee.",
+#     )
+#     season = models.ForeignKey(
+#         Season,
+#         on_delete=models.PROTECT,
+#         default=get_current_id,
+#         help_text="The season to which mentee is applying for.",
+#     )
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=["user", "season"],
-                name="mentor_unique_user_season",
-            )
-        ]
+#     def __str__(self):
+#         return self.user.roll_number
+
+#     class Meta:
+#         constraints = [
+#             models.UniqueConstraint(
+#                 fields=["user", "season"],
+#                 name="mentor_unique_user_season",
+#             )
+#         ]
 
 
 class Mentee(models.Model):
@@ -162,7 +164,7 @@ class Project(models.Model):
         default=get_current_id,
     )
 
-    mentors = models.ManyToManyField(Mentor, through="MentorRequest")
+    # mentors = models.ManyToManyField(Mentor, through="MentorRequest")
 
     # class CategoryChoices(models.TextChoices):
     #     BLOCKCHAIN = "WEB3", "Blockchain"
@@ -198,24 +200,24 @@ class Project(models.Model):
         super().save(*args, **kwargs)
 
 
-class MentorRequest(models.Model):
-    """
-    Explicit many-to-many linking table between Project and
-    Mentor. Doubles as the (co-)mentor request table
-    """
+# class MentorRequest(models.Model):
+#     """
+#     Explicit many-to-many linking table between Project and
+#     Mentor. Doubles as the (co-)mentor request table
+#     """
 
-    mentor = models.ForeignKey(Mentor, on_delete=models.CASCADE)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+#     mentor = models.ForeignKey(Mentor, on_delete=models.CASCADE)
+#     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
-    class RequestStatusChoices(models.IntegerChoices):
-        PENDING = 0b00
-        FIRST_MENTOR = 0b01
-        REJECTED = 0b10
-        ACCEPTED = 0b11
+#     class RequestStatusChoices(models.IntegerChoices):
+#         PENDING = 0b00
+#         FIRST_MENTOR = 0b01
+#         REJECTED = 0b10
+#         ACCEPTED = 0b11
 
-    status = models.IntegerField(
-        choices=RequestStatusChoices.choices, default=RequestStatusChoices.PENDING
-    )
+#     status = models.IntegerField(
+#         choices=RequestStatusChoices.choices, default=RequestStatusChoices.PENDING
+#     )
 
 
 class MenteePreference(models.Model):
@@ -225,6 +227,5 @@ class MenteePreference(models.Model):
 
     mentee = models.ForeignKey(Mentee, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-
     sop = models.TextField()
     ordering = models.IntegerField()
