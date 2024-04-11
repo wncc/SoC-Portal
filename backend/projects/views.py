@@ -1,7 +1,7 @@
 from rest_framework import generics
 
 from .models import Project
-from .serializers import ProjectSerializer
+from .serializers import ProjectSerializer, BasicProjectSerializer
 
 from projects.models import Season
 from rest_framework import generics, views
@@ -16,6 +16,11 @@ class ProjectListView(generics.ListAPIView):
     permission_classes = []
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
+
+class BasicProjectListView(generics.ListAPIView):
+    permission_classes = []
+    queryset = Project.objects.all()
+    serializer_class = BasicProjectSerializer
 
 
 # class ProjectAddView(generics.CreateAPIView):

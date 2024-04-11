@@ -146,15 +146,26 @@ class Mentee(models.Model):
         ]
 
 
-class ProjectCategory(models.Model):
-    name = models.CharField(max_length=255, blank=False)
-    description = models.TextField()
+# class ProjectCategory(models.Model):
+#     name = models.CharField(max_length=255, blank=False)
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
+
+
 
 
 class Project(models.Model):
+
+    GeneralCategoryChoices = (
+        ('ML', 'ML'),
+        ('Developement', 'Development'),
+        ('Blockchain', 'Blockchain'),
+        ('CP', 'CP'),
+        ('Others', 'Others'),
+    )
+
+
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=255, blank=False)
     season = models.ForeignKey(
@@ -173,22 +184,33 @@ class Project(models.Model):
     #     CP = "CP", "Competitive Programming"
     #     MISCELLANEOUS = "MISC", "Miscellaneous"
 
-    category = models.ForeignKey(ProjectCategory, on_delete=models.PROTECT)
+    # category = models.ForeignKey(ProjectCategory, on_delete=models.PROTECT)
 
-    mentee_min = models.IntegerField(
-        default=1, validators=[MinValueValidator(1), MaxValueValidator(20)]
-    )
-    mentee_max = models.IntegerField(
-        blank=False, validators=[MinValueValidator(1), MaxValueValidator(20)]
-    )
+    general_category = models.CharField(max_length=255, blank=False, default='Others', choices=GeneralCategoryChoices)
 
-    abstract = models.TextField(max_length=500)
-    description = models.TextField()
-    timeline = models.TextField()
+    specific_category = models.CharField(max_length=255, blank=False, default='NA')
+
+
+    mentee_max = models.CharField(max_length=255, blank=False)
+    co_mentor_info = models.TextField()
+
+    # mentee_min = models.IntegerField(
+    #     default=1, validators=[MinValueValidator(1), MaxValueValidator(20)]
+    # )
+    # mentee_max = models.IntegerField(
+    #     blank=False, validators=[MinValueValidator(1), MaxValueValidator(20)]
+    # )
+
+    # abstract = models.TextField(max_length=500)
+    description = models.TextField(blank=False, default="NA")
+    timeline = models.TextField(blank=False, default="NA")
+    checkpoints = models.TextField(blank=False, default="NA")
+    prereuisites = models.TextField(blank=False, default="NA")
+    co_mentor_info = models.TextField(blank=False, default="NA")  
     banner_image = models.ImageField(upload_to=upload_to, blank=True, null=True)
 
     code = models.CharField(max_length=8, editable=False, unique=True)
-    is_accepted = models.BooleanField(default=False)
+    # is_accepted = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

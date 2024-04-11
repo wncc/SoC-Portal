@@ -10,6 +10,12 @@ class ProjectSerializer(serializers.ModelSerializer):
         read_only_fields = ["season"]
 
 
+class BasicProjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Project
+        fields = ["id", "title", "general_category", "banner_image"]
+
+
 # class MentorRequestSerializer(serializers.ModelSerializer):
 #     project = ProjectSerializer()
 
