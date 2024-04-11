@@ -39,15 +39,34 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "corsheaders",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
+    "drf_yasg",
+    "accounts",
+    "projects",
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000/",
+    "http://127.0.0.1:3000/",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+CORS_ALLOW_CREDENTIALS = True
+
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -79,7 +98,10 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": ("accounts.custom_auth.CookieJWTAuthentication",),
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticated",
+        "accounts.permissions.HasUserProfile",
+    ),
 }
 
 
@@ -90,6 +112,14 @@ SIMPLE_JWT = {
 }
 
 
+IITB_SSO = {
+    "TOKEN_URL": "https://gymkhana.iitb.ac.in/sso/oauth/token/",
+    "PROFILE_URL": "https://gymkhana.iitb.ac.in/sso/user/api/user/?fields=basic,first_name,last_name,type,program,roll_number",
+    "CLIENT_ID": "Ihnr8QIPdQkGC1VRuObDrSOMAjqKM5IXbJji5q62",
+    "CLIENT_SECRET_BASE64": "VERGMUh6MUNCN0pVZEd2QVJQb0dYRlRNR3hvbVZPMjRLUVBxaURKdzJ0cmcxTFF1bzhmc2t2ZVVWYUt2b1o5MVhoTDZhMjNHWkRFV3VYUVBPZnNGRklrVlhUem1ISENJb2k3YUxTUW51aXVlRVNQYk9lbmZmaE15M0cxNU9YZ0o==",
+}
+
+SSO_BAD_CERT = True  # Set to False if you have a valid certificate
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -136,6 +166,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+
+# Media files (only used when DEBUG = True)
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
