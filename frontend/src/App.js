@@ -1,18 +1,18 @@
-import './App.css';
-import React from 'react';
-import Navbar from './components/Navbar';
-import Textform from './components/Textform';
-import Reviews from './components/Reviews';
-import Login from './pages/Login';
-import Projects from './pages/Projects';
-import "./components/scrollable.css"
-import Button from './components/Button';
+import "./App.css";
+import React from "react";
+import Navbar from "./components/Navbar";
+import Textform from "./components/Textform";
+import Reviews from "./components/Reviews";
+import Login from "./pages/Login";
+import Projects from "./pages/Projects";
+import "./components/scrollable.css";
+import Button from "./components/Button";
 import { Routes, Route } from "react-router-dom";
-import Dashboard from './components/Dashboard';
-import ProjectCard from './components/ProjectCard';
-import ProjectForm from './pages/ProjectFrom';
-import Register from './pages/Register';
-
+import Dashboard from "./components/Dashboard";
+import ProjectCard from "./components/ProjectCard";
+import ProjectForm from "./pages/ProjectForm";
+import Register from "./pages/Register";
+import ProjectDetails from "./pages/ProjectDetails";
 
 export default function App() {
   return (
@@ -22,14 +22,16 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Textform />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/current_projects" element={<Projects/>}/>
+          <Route path="/login" element={<Login />} />
+          <Route path="/current_projects" element={<Projects />}>
+            <Route path=":ProjectId" element={<ProjectDetails />} />
+          </Route>
           {/* <Route path="/course" element={<Courses />} />
           <Route path="/live" element={<Live />} />
           <Route path="/contact" element={<Contact />} /> */}
-          <Route path="/previous_projects" element={<Login/>}/>
-          <Route path="/Dashboard" element={<Dashboard/>}/>
-          <Route path="/Dashboard/ProjectForm" element={<ProjectForm/>}/>
+          <Route path="/previous_projects" element={<Login />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/Dashboard/ProjectForm" element={<ProjectForm />} />
         </Routes>
 
         {/* <div class="containerscrollable">
