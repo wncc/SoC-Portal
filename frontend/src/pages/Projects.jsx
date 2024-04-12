@@ -1,5 +1,6 @@
 import ProjectCard from "../components/ProjectCard"
 import axios from "axios";
+import "../components/Filter.css"
 import { useEffect } from "react";
 import { useState } from "react";
 import { useMemo } from "react";
@@ -83,24 +84,24 @@ export default function Projects() {
     <Outlet/>
     
 
-    <div className="pt-8 flex items-center justify-center">
-      <div className="inline-flex rounded-md shadow-sm" role="group">
-        <button type="button" onClick={() => {handleFilterChange('All'); setActive('b1')}} className={`w-40 px-4 py-2 text-sm font-medium ${active==='b1' ? 'text-white' :'text-gray-900'} ${active==='b1' ? 'bg-indigo-600' : 'bg-white'} border border-gray-500 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2  `}>
+    <div className="pt-8 flex items-center justify-center ">
+      <div className="inline-flex sm:flex-wrap rounded-md shadow-sm" role="group">
+        <button type="button" onClick={() => {handleFilterChange('All'); setActive('b1')}} className={`w-40 px-4 py-2 text-sm font-medium ${active==='b1' ? 'text-white' :'text-gray-900'} ${active==='b1' ? 'bg-indigo-600' : 'bg-white'} border border-gray-500 rounded-s-lg hover:bg-indigo-600 hover:text-white focus:z-10 focus:ring-2  `}>
           ALL
         </button>
-        <button type="button" onClick={() => {handleFilterChange('ML'); setActive('b2')}} className={`w-40 px-4 py-2 text-sm font-medium ${active==='b2' ? 'text-white' :'text-gray-900'} ${active==='b2' ? 'bg-indigo-600' : 'bg-white'} border border-gray-500 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2`}>
+        <button type="button" onClick={() => {handleFilterChange('ML'); setActive('b2')}} className={`w-40 px-4 py-2 text-sm font-medium ${active==='b2' ? 'text-white' :'text-gray-900'} ${active==='b2' ? 'bg-indigo-600' : 'bg-white'} border border-gray-500 hover:bg-indigo-600 hover:text-white focus:z-10 focus:ring-2`}>
           ML
         </button>
-        <button type="button" onClick={() => {handleFilterChange('Development'); setActive('b3')}} className={`w-40 px-4 py-2 text-sm font-medium ${active==='b3' ? 'text-white' :'text-gray-900'} ${active==='b3' ? 'bg-indigo-600' : 'bg-white'} border border-gray-500 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 `}>
+        <button type="button" onClick={() => {handleFilterChange('Development'); setActive('b3')}} className={`w-40 px-4 py-2 text-sm font-medium ${active==='b3' ? 'text-white' :'text-gray-900'} ${active==='b3' ? 'bg-indigo-600' : 'bg-white'} border border-gray-500 hover:bg-indigo-600 hover:text-white focus:z-10 focus:ring-2 `}>
           Development
         </button>
-        <button type="button" onClick={() => {handleFilterChange('Blockchain'); setActive('b4')}} className={`w-40 px-4 py-2 text-sm font-medium ${active==='b4' ? 'text-white' :'text-gray-900'} ${active==='b4' ? 'bg-indigo-600' : 'bg-white'} border border-gray-500 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 `}>
+        <button type="button" onClick={() => {handleFilterChange('Blockchain'); setActive('b4')}} className={`w-40 px-4 py-2 text-sm font-medium ${active==='b4' ? 'text-white' :'text-gray-900'} ${active==='b4' ? 'bg-indigo-600' : 'bg-white'} border border-gray-500 hover:bg-indigo-600 hover:text-white focus:z-10 focus:ring-2 `}>
           Blockchain
         </button>
-        <button type="button" onClick={() => {handleFilterChange('CP'); setActive('b5')}} className={`w-40 px-4 py-2 text-sm font-medium ${active==='b5' ? 'text-white' :'text-gray-900'} ${active==='b5' ? 'bg-indigo-600' : 'bg-white'} border border-gray-500 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 `}>
+        <button type="button" onClick={() => {handleFilterChange('CP'); setActive('b5')}} className={`w-40 px-4 py-2 text-sm font-medium ${active==='b5' ? 'text-white' :'text-gray-900'} ${active==='b5' ? 'bg-indigo-600' : 'bg-white'} border border-gray-500 hover:bg-indigo-600 hover:text-white focus:z-10 focus:ring-2 `}>
           CP
         </button>
-        <button type="button" onClick={() => {handleFilterChange('Others'); setActive('b6')}} className={`w-40 px-4 py-2 text-sm font-medium ${active==='b6' ? 'text-white' :'text-gray-900'} ${active==='b6' ? 'bg-indigo-600' : 'bg-white'} border border-gray-500 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 `}>
+        <button type="button" onClick={() => {handleFilterChange('Others'); setActive('b6')}} className={`w-40 px-4 py-2 text-sm font-medium ${active==='b6' ? 'text-white' :'text-gray-900'} ${active==='b6' ? 'bg-indigo-600' : 'bg-white'} border border-gray-500 rounded-e-lg hover:bg-indigo-600 hover:text-white focus:z-10 focus:ring-2 focus:ring-blue-700 `}>
           Others
         </button>
       </div>

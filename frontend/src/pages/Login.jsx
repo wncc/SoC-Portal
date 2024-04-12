@@ -38,8 +38,8 @@ export default function Login() {
 
                 }
                 else {
-                    <h1>
-                        wrong username or password
+                    <h1 className='text-center text-red-600'>
+                        wrong username or password!
                     </h1>
                 }
             }
@@ -60,27 +60,27 @@ export default function Login() {
     }
 
 
-    // Showing success message
-    const successMessage = () => {
-        return (
-            <>
-                <div
-                    className="success"
-                    style={{
-                        display: submitted && profile.role ? '' : 'none',
-                    }}>
-                    <h1>You have successfully registered as an SoC mentor!!</h1>
-                </div>
-                <div
-                    className="success"
-                    style={{
-                        display: submitted && !profile.role ? '' : 'none',
-                    }}>
-                    <h1>You have successfully registered as an SoC mentee!!</h1>
-                </div>
-            </>
-        );
-    };
+    // // Showing success message
+    // const successMessage = () => {
+    //     return (
+    //         <>
+    //             <div
+    //                 className="success"
+    //                 style={{
+    //                     display: submitted && profile.role ? '' : 'none',
+    //                 }}>
+    //                 <h1>You have successfully registered as an SoC mentor!!</h1>
+    //             </div>
+    //             <div
+    //                 className="success"
+    //                 style={{
+    //                     display: submitted && !profile.role ? '' : 'none',
+    //                 }}>
+    //                 <h1>You have successfully registered as an SoC mentee!!</h1>
+    //             </div>
+    //         </>
+    //     );
+    // };
 
     // Showing error message if error is true
 
@@ -88,14 +88,15 @@ export default function Login() {
         <div className="form ">
 
             {/* Calling to the methods */}
-            <div className="messages">
+            {/* <div className="messages">
 
                 {successMessage()}
-            </div>
+            </div> */}
 
             <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-lg">
                     <h1 className="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">&lt;/&gt;Seasons of Code&lt;/&gt;</h1>
+                    
 
                     <form onSubmit={handleSubmit} className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
                         <p className="text-center text-lg font-medium">Login to your account</p>
