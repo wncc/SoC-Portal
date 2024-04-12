@@ -127,23 +127,16 @@ class Mentee(models.Model):
     #     help_text="The project that the mentee has been selected for. Is NULL if not selected yet.",
     # )
 
-    preferences = models.ManyToManyField(
-        "Project",
-        through="MenteePreference",
-        related_name="applications",
-        help_text="The projects that the mentee has applied to.",
-    )
+    # preferences = models.ManyToManyField(
+    #     "Project",
+    #     through="MenteePreference",
+    #     related_name="applications",
+    #     help_text="The projects that the mentee has applied to.",
+    # )
+
 
     def __str__(self):
         return self.user.roll_number
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=["user", "season"],
-                name="mentee_unique_user_season",
-            )
-        ]
 
 
 # class ProjectCategory(models.Model):
@@ -192,6 +185,7 @@ class Project(models.Model):
 
 
     mentee_max = models.CharField(max_length=255, blank=False)
+    mentor = models.CharField(max_length=255, blank=False, default="NA")
     co_mentor_info = models.TextField()
 
     # mentee_min = models.IntegerField(
@@ -242,12 +236,32 @@ class Project(models.Model):
 #     )
 
 
+class MenteeWishlist(models.Model):
+    """
+    Preferences of a mentee (ie a user during a specific season)
+    """
+    mentee = models.ForeignKey(Mentee, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    # sop = models.TextField()
+    # preference = models.IntegerField()
+
+    class Meta:
+        unique_together = ('mentee', 'project')
+
+
 class MenteePreference(models.Model):
     """
     Preferences of a mentee (ie a user during a specific season)
     """
-
     mentee = models.ForeignKey(Mentee, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    sop = models.TextField()
-    ordering = models.IntegerField()
+    sop = models.TextField(null=False)
+    preference = models.IntegerField(null=False, blank=False)
+
+    class Meta:
+        unique_together = [
+            ('mentee', 'project', 'preference'),
+            ('mentee', 'project'),
+        ]
+
+

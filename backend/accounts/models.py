@@ -30,7 +30,7 @@ class UserProfile(models.Model):
     profile_picture = models.ImageField(
         upload_to=upload_to_location, blank=True, default=""
     )
-    phone_number = models.CharField(max_length=15, blank=True, default="")
+    phone_number = models.CharField(max_length=15, blank=False, null=False)
     roll_number = models.CharField(
         "roll number",
         max_length=20,
@@ -40,10 +40,14 @@ class UserProfile(models.Model):
             "unique": "A user with that roll number already exists.",
         },
     )
-    year = models.IntegerField(choices=YearChoices.choices, default=YearChoices.YEAR_2)
+    year = models.IntegerField(choices=YearChoices.choices, null=False, blank=False)
     department = models.CharField(
-        max_length=50, choices=DepartmentChoices.choices, blank=True, default=""
+        max_length=50, choices=DepartmentChoices.choices, blank=False, null=False
     )
+
+    verified = models.BooleanField(default=False)
+
+    verification_token = models.CharField(max_length=32, blank=True, default="")
 
 
 

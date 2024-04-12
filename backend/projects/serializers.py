@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Project
+from .models import Project, MenteePreference
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -14,6 +14,20 @@ class BasicProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = ["id", "title", "general_category", "banner_image"]
+
+class MenteePreferenceSerializer(serializers.ModelSerializer):
+    project = BasicProjectSerializer()
+
+    class Meta:
+        model = MenteePreference
+        fields = "__all__"
+
+class MenteePreferenceSaveSerializer(serializers.ModelSerializer):
+
+
+    class Meta:
+        model = MenteePreference
+        fields = "__all__"
 
 
 # class MentorRequestSerializer(serializers.ModelSerializer):

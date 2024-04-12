@@ -31,22 +31,26 @@ class UserSerializer(serializers.ModelSerializer):
 
 class RegisterUserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = [
-            "username",
-            "email",
-            "password",
-        ]
+        model = UserProfile
+        exclude = ["verified", "verification_token"]
         extra_kwargs = {
             "password": {"style": {"input_type": "password"}, "write_only": True}
         }
 
-    def create(self, validated_data):
-        """
-        Override the create method with objects.create_user,
-        since the former saves with an unencrypted password
-        """
-        return User.objects.create_user(validated_data)
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        exclude = ["user", "verified",  "verification_token"]
+        extra_kwargs = {
+            "roll_number": {"read_only": True}
+        }
+
+    # def create(self, validated_data):
+    #     """
+    #     Override the create method with objects.create_user,
+    #     since the former saves with an unencrypted password
+    #     """
+    #     return User.objects.create_user(validated_data)
 
 
 class RegisterUserProfileSerializer(serializers.ModelSerializer):
