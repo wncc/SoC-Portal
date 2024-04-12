@@ -7,12 +7,12 @@ export default function Register() {
     // role: 1 for mentor, 0 for mentee
     const [profile, setProfile] = useState({
         role: '0',
-        first_name: '',
-        last_name: '',
+        name: '',
         roll_number: '',
         phone: '',
         email: '',
         password: '',
+        yearOfStudy: '',
     });
 
     // States for checking the errors
@@ -34,7 +34,7 @@ export default function Register() {
     const handleSubmit = (e) => {
         console.log(profile);
         e.preventDefault();
-        if (profile.first_name === '' || profile.last_name === '' || profile.email === '' || profile.password === '' || profile.phone === '' || profile.roll_number === '') {
+        if (profile.name === '' || profile.email === '' || profile.password === '' || profile.phone === '' || profile.roll_number === '' || profile.yearOfStudy) {
             setError(true);
         } else {
             setSubmitted(true);
@@ -47,17 +47,6 @@ export default function Register() {
             })
             .catch(err => console.log(err))
     };
-
-
-
-    const role0 = () => {
-        profile.role = 0;
-    }
-
-    const role1 = () => {
-        profile.role = 1;
-    }
-
 
     // Showing success message
     const successMessage = () => {
@@ -113,10 +102,10 @@ export default function Register() {
                 <div className="mx-auto max-w-lg">
                     <h1 className="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">&lt;/&gt;Seasons of Code&lt;/&gt;</h1>
 
-                    <form onSubmit={handleSubmit} className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
+                    <form onSubmit={handleSubmit} className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-2xl sm:p-6 lg:p-8">
                         <p className="text-center text-lg font-medium">Registration Form</p>
 
-                        <div className="grid grid-cols-1 gap-4 text-center sm:grid-cols-2">
+                        {/* <div className="grid grid-cols-1 gap-4 text-center sm:grid-cols-2">
                             <div>
                                 <label
                                     for="Option1"
@@ -140,10 +129,10 @@ export default function Register() {
                                     <span className="text-sm"> Mentor </span>
                                 </label>
                             </div>
-                        </div>
+                        </div> */}
 
                         <div>
-                            <label for="text" className="sr-only" >Name</label>
+                            <label for="text">Name</label>
 
                             <div className="relative">
                                 <input
@@ -159,7 +148,7 @@ export default function Register() {
                         </div>
 
                         <div>
-                            <label for="text" className="sr-only" >Roll No.</label>
+                            <label for="text">IITB Roll No.</label>
 
                             <div className="relative">
                                 <input
@@ -175,7 +164,7 @@ export default function Register() {
                         </div>
 
                         <div>
-                            <label for="text" className="sr-only" >Email</label>
+                            <label for="text">Email Address</label>
 
                             <div className="relative">
                                 <input
@@ -191,7 +180,7 @@ export default function Register() {
                         </div>
 
                         <div>
-                            <label for="text" className="sr-only" >Mobile No.</label>
+                            <label for="text"  >Phone No.</label>
 
                             <div className="relative">
                                 <input
@@ -208,7 +197,7 @@ export default function Register() {
 
 
                         <div>
-                            <label for="password" className="sr-only">Password</label>
+                        <label for="password">Password</label>
 
                             <div className="relative">
                                 <input
@@ -222,12 +211,24 @@ export default function Register() {
 
                             </div>
                         </div>
+                        <div className="inline-block relative w-full">
+                        <label for="password">Year of Study</label>
+                            <select id="yearOfStudy" onChange={handleProfile} className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" required>
+                                <option disabled selected>Select Year of Study</option>   
+                                <option>UG 1st Year</option>
+                                <option>UG 2nd Year</option>
+                                <option>UG 3rd Year</option>
+                                <option>UG 4th Year</option>
+                                <option>DD 5th Year</option>
+                                <option>Masters/PhD</option>
+                            </select>
+                        </div>
 
                         <button
                             type="submit"
                             className="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white"
                         >
-                            Login
+                            Register
                         </button>
 
                         <p className="text-center text-sm text-gray-500">
