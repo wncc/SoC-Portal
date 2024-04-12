@@ -18,9 +18,9 @@ function ProjectCard(props) {
               {props.title}
             </h3>
 
-            <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
+            {/* <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
               {props.description}
-            </p>
+            </p> */}
           </div>
         </article>
       </a>
