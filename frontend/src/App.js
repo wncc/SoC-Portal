@@ -13,6 +13,7 @@ import ProjectCard from "./components/ProjectCard";
 import ProjectForm from "./pages/ProjectForm";
 import Register from "./pages/Register";
 import ProjectDetails from "./pages/ProjectDetails";
+import PreferenceForm from "./pages/PreferenceForm";
 
 export default function App() {
   return (
@@ -31,7 +32,8 @@ export default function App() {
           <Route path="/contact" element={<Contact />} /> */}
           <Route path="/previous_projects" element={<Login />} />
           <Route path="/Dashboard" element={<Dashboard />} />
-          <Route path="/Dashboard/ProjectForm" element={<ProjectForm />} />
+          {/* <Route path="/Dashboard/ProjectForm" element={<ProjectForm />} /> */}
+          <Route path="PreferenceForm" element={<PreferenceForm />} />
         </Routes>
 
         {/* <div class="containerscrollable">
