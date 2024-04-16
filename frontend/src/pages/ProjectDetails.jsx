@@ -1,13 +1,14 @@
 import React from 'react';
 import ProjectTimeline from '../components/ProjectTimeline';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from "axios";
-import Mentor from '../components/Mentor';
 import ProjectTitle from '../components/ProjectTitle';
+import WishlistButton from '../components/WishlistButton'
 
 
 export default function ProjectDetails() {
 
+    const [Added, setAdded] = useState(false);
     const [details, setDetails] = useState();
 
     useEffect(() => {
@@ -36,15 +37,59 @@ export default function ProjectDetails() {
     //     "checkpoints": "Checkpoint 1: Learning of python libraries numpy, pandas and matplotlib.\r\nCheckpoint 2: Implementation of neural networks and regression models from scratch and using it against a dataset\r\nCheckpoint 3:Building strong foundation of other additional libraries tensorflow, librosa and scikit- learn\r\nCheckpoint 4: Ideation and basic structure designing of final project\r\nCheckpoint 5: Code implementation and accuracy refinement",
     //     "prereuisites": "Basics of python and loads of enthusiasm",//done
     //     "co_mentor_info": "Aryaman Angurana(22b1043)\r\nAryan Adinath Popalghhat(210020080)",//done
-    //     "banner_image": "https://itc.gymkhana.iitb.ac.in/wncc/assets/images/soc/2023/item221.jpg",//done
+    //     "banner_image": "https://itc.gymkhana.iitb.ac.in/wncc/assets/images/soc/2023/item222.jpg",//done
     //     "code": "34d591dd",//no use
     //     "season": 1//no use
     // }
+    const req_details = {
+        "id": details.id,
+        "title": details.title,
+        "banner_image": details.banner_image,
+        "general_category": details.general_category
+    }
 
     const descriptionWithLinks = details.description.replace(
         /(https?:\/\/[^\s]+)/g,
         '<a href="$1" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">$1</a>'
-      );
+    );
+
+    //if project is in users wishlist then return true, else false
+    const search = () =>{
+        axios.get(`api/user/wishlist/:${details.id}`)
+        .then(res => {
+            setAdded(res)
+        })
+        .catch(err => console.log(err))
+    }
+    search();
+    const buttonMessage = Added ? "Remove From Wishlist" : "Add To Wishlist";
+    const [str, setStr] = useState([buttonMessage]);
+    let title = details.title;
+
+
+    const WishlistAdd = (e) => {
+        console.log(details);
+        if(!Added){
+            axios.post('api/user/wishlist/', req_details)
+                .then(res => {
+                    console.log(res)
+                    setAdded(true)
+                    setStr([`mv ${title.replace(/\s+/g, '_')}.txt ./Wishlist`, "Remove From Wishlist"]);
+                })
+                .catch(err => console.log(err))
+            }
+            else{
+                axios.delete(`api/user/wishlist/:${details.id}`)
+                .then(res => {
+                    console.log(res)
+                    setAdded(false)
+                    setStr(["cd ./Wishlist", `rm ${title}.txt`, "Add To Wishlist"]);
+                })
+                .catch(err => console.log(err))
+            }
+    }
+
+    
 
 
     return (  
@@ -59,17 +104,17 @@ export default function ProjectDetails() {
                     </div>
                 </div>
                 <div className="grid grid-cols-1 pb-10 gap-4 lg:grid-cols-3 lg:gap-8">
-                    <div className="h-75 rounded-lg">
+                    <div className="h-56 rounded-lg">
                         {/* <img alt="" src="https://itc.gymkhana.iitb.ac.in/wncc/assets/images/soc/2023/item221.jpg" className="h-75 w-full object-cover"/> */}
-                        <img alt="" src={details.banner_image} className="h-75 w-full object-cover"/>
+                        <img alt="" src={details.banner_image} className="h-56 w-full object-contain"/>
                     </div>
-                    <div className="h-75 rounded-lg lg:col-span-2">
+                    <div className="rounded-lg lg:col-span-2 h-75">
                         
                         <div className="grid grid-cols-1 gap-1 lg:grid-cols-2 lg:gap-8">
                             <div className="h-12 rounded-lg">
                                 <h4 className=" pt-5 text-2xl text-indigo-400 sm:text-3xl">Mentors:</h4>
                                 <ul className="pl-8 sm:pl-2 md:pl-8 lg:pl-20">
-                                    <Mentor mentor={details.mentor}/>
+                                    <p>{details.mentor}</p>
                                 </ul>
                             </div>
                             <div className="h-28 rounded-lg">
@@ -101,15 +146,13 @@ export default function ProjectDetails() {
                                 </ul>
                             </div>
                         </div>
+                        <WishlistButton str={str} WishlistAdd={WishlistAdd}/>
 
                     </div>
                 </div>
-                <div className="rounded-lg">
+                {/* <div className="rounded-lg">
                     <h2 className="text-2xl text-indigo-600 sm:text-3xl">Description:</h2>
-                    {/* <p>We propose a deep learning method for single image super-resolution. They will start by learning the basics of python and then proceed onto deep learning. Following which they learn about deep neural network architecture for image super resolution and implement a model that takes a low-resolution image as the input and outputs the high-resolution one. Further readings: https://medium.com/analytics-vidhya/super-resolution-and-its-recent-advances-in-deep-learning-part-1-c6d927914d32
-Prerequisites: None. Interest in image processing is appreciated. Basic knowledge about python and deep learning is a bonus but not necessary.</p> */}
                     <p dangerouslySetInnerHTML={{ __html: descriptionWithLinks.replace(/\r\n/g, "<br>") }}></p>
-                    {/* <p className='pt-3'>Prerequisites: BASIC PYTHON , (HTML OR STREAMLIT) , BASIC KNOWLEDGE OF NEURAL NETWORK, RNN</p> */}
                     <h2 className="text-2xl pt-3 text-indigo-600 sm:text-3xl">Prerequisites:</h2>
                     <p>{details.prereuisites}</p>
                     <h2 className="text-2xl pt-3 text-indigo-600 sm:text-3xl">Timeline:</h2>
@@ -117,6 +160,30 @@ Prerequisites: None. Interest in image processing is appreciated. Basic knowledg
                     <h2 className="text-2xl pt-3 text-indigo-600 sm:text-3xl">Checkpoints:</h2>
                     <p dangerouslySetInnerHTML={{ __html: details.checkpoints.replace(/\r\n/g, "<br>") }}></p>
 
+                </div> */}
+
+                <div className="flow-root">
+                    <dl className="-my-3 divide-y divide-gray-100 text-sm">
+                        <div className="grid grid-cols-1 gap-1 py-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+                            <dt className="text-2xl text-indigo-600 sm:text-3xl">Description</dt>
+                            <dd className="text-gray-700 sm:col-span-2"><p dangerouslySetInnerHTML={{ __html: descriptionWithLinks.replace(/\r\n/g, "<br>") }}></p></dd>
+                        </div>
+
+                        <div className="grid grid-cols-1 gap-1 py-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+                            <dt className="text-2xl text-indigo-600 sm:text-3xl">Prerequisites</dt>
+                            <dd className="text-gray-700 sm:col-span-2">{details.prereuisites}</dd>
+                        </div>
+
+                        <div className="grid grid-cols-1 gap-1 py-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+                            <dt className="text-2xl text-indigo-600 sm:text-3xl">Timeline</dt>
+                            <dd className="text-gray-700 sm:col-span-2"><p dangerouslySetInnerHTML={{ __html: details.timeline.replace(/\r\n/g, "<br>") }}></p></dd>
+                        </div>
+
+                        <div className="grid grid-cols-1 gap-1 py-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+                            <dt className="text-2xl text-indigo-600 sm:text-3xl">Checkpoints</dt>
+                            <dd className="text-gray-700 sm:col-span-2"><p dangerouslySetInnerHTML={{ __html: details.checkpoints.replace(/\r\n/g, "<br>") }}></p></dd>
+                        </div>
+                    </dl>
                 </div>
 
                 {/* <div className="pt-5">

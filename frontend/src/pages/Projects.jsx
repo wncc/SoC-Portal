@@ -121,7 +121,7 @@ export default function Projects() {
     ))} */}
     {filteredProjects.map((project, index) =>(
       <div key={index}>
-        <ProjectCard ProjectId={`project+${project.id}`} link={project.banner_image} title={project.title} description={project.props} />
+        <ProjectCard ProjectId={project.id} link={project.banner_image} title={project.title} general_category={project.general_category} />
       </div>
     ))}
     </div>
