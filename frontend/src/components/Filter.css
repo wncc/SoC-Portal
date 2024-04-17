@@ -1,0 +1,13 @@
+@media (max-width: 640px) {
+    .w-40 {
+      width: 25% !important;
+    }
+    .px-4 {
+      padding-left: 0.5rem !important;
+      padding-right: 0.5rem !important;
+    }
+    .py-2 {
+      padding-top: 0.25rem !important;
+      padding-bottom: 0.25rem !important;
+    }
+  }

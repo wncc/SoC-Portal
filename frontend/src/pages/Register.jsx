@@ -132,7 +132,7 @@ export default function Register() {
                         </div> */}
 
                         <div>
-                            <label for="text">Name</label>
+                            <label for="name">Name</label>
 
                             <div className="relative">
                                 <input
@@ -148,7 +148,7 @@ export default function Register() {
                         </div>
 
                         <div>
-                            <label for="text">IITB Roll No.</label>
+                            <label for="roll_number">IITB Roll No.</label>
 
                             <div className="relative">
                                 <input
@@ -164,7 +164,7 @@ export default function Register() {
                         </div>
 
                         <div>
-                            <label for="text">Email Address</label>
+                            <label for="email">Email Address</label>
 
                             <div className="relative">
                                 <input
@@ -180,7 +180,7 @@ export default function Register() {
                         </div>
 
                         <div>
-                            <label for="text"  >Phone No.</label>
+                            <label for="phone"  >Phone No.</label>
 
                             <div className="relative">
                                 <input
@@ -212,15 +212,15 @@ export default function Register() {
                             </div>
                         </div>
                         <div className="inline-block relative w-full">
-                        <label for="password">Year of Study</label>
+                        <label for="yearOfStudy">Year of Study</label>
                             <select id="yearOfStudy" onChange={handleProfile} className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" required>
                                 <option disabled selected>Select Year of Study</option>   
-                                <option>UG 1st Year</option>
-                                <option>UG 2nd Year</option>
-                                <option>UG 3rd Year</option>
-                                <option>UG 4th Year</option>
-                                <option>DD 5th Year</option>
-                                <option>Masters/PhD</option>
+                                <option value="UG 1st Year">UG 1st Year</option>
+                                <option value="UG 2nd Year">UG 2nd Year</option>
+                                <option value="UG 3rd Year">UG 3rd Year</option>
+                                <option value="UG 4th Year">UG 4th Year</option>
+                                <option value="DD 5th Year">DD 5th Year</option>
+                                <option value="Masters/PhD">Masters/PhD</option>
                             </select>
                         </div>
 
