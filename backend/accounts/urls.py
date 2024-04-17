@@ -12,4 +12,6 @@ urlpatterns = [
     # path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("register/", views.RegisterUserView.as_view(), name="register_user"),
     path("verify-email/<str:token>/", views.verify_email, name="verify_email"),
+    path('departments/', views.DepartmentListAPIView.as_view(), name='department-list'),
+    path('years/', views.YearListAPIView.as_view(), name='year-list'),
 ]
