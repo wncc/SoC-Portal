@@ -1,22 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from .options import DepartmentChoices, YearChoices
 
 def upload_to_location(instance, filename):
     return "profile_pictures/{filename}".format(filename=filename)
 
-class YearChoices(models.IntegerChoices):
-        YEAR_1 = 1, "First Year"
-        YEAR_2 = 2, "Second Year"
-        YEAR_3 = 3, "Third Year"
-        YEAR_4 = 4, "Fourth Year"
-        YEAR_5 = 5, "Fifth Year"
 
 
-class DepartmentChoices(models.TextChoices):
-        CHEMICAL_ENGINEERING = "Chemical Engineering", "Chemical Engineering"
-        MECHANICAL_ENGINEERING = "Mechanical Engineering", "Mechanical Engineering"
-        ELECTRICAL_ENGINEERING = "Electrical Engineering", "Electrical Engineering"
+
 
 
 # Create your models here.
@@ -40,7 +31,7 @@ class UserProfile(models.Model):
             "unique": "A user with that roll number already exists.",
         },
     )
-    year = models.IntegerField(choices=YearChoices.choices, null=False, blank=False)
+    year = models.CharField(choices=YearChoices.choices, null=False, blank=False, max_length=100)
     department = models.CharField(
         max_length=50, choices=DepartmentChoices.choices, blank=False, null=False
     )

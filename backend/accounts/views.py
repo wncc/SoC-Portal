@@ -19,8 +19,34 @@ from .serializers import RegisterUserSerializer, UserAutoCompleteSerializer, Use
 
 from projects.models import Mentee
 
+from .options import DepartmentChoices, YearChoices
+
+
+
 
 from django.utils.crypto import get_random_string
+
+
+# views.py
+from rest_framework import generics
+from rest_framework.response import Response
+from .models import DepartmentChoices
+
+class DepartmentListAPIView(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request):
+        departments = DepartmentChoices.choices
+        return Response(departments)
+    
+
+class YearListAPIView(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request):
+        years = YearChoices.choices
+        return Response(years)
+
+
+
 
 def generate_verification_token():
     return get_random_string(length=32)
@@ -30,6 +56,9 @@ def verify_email(request, token):
     try:
         user_profile = UserProfile.objects.get(verification_token=token)
         user_profile.verified = True
+        user = user_profile.user
+        user.is_active = True
+        user.save()
         user_profile.save()
         mentee = Mentee.objects.create(user=user_profile)
         mentee.save()
@@ -50,7 +79,7 @@ def send_verification_email(user_profile):
     
     Regards,
     SOC Menteee Team"""
-    from_email = '210020130@iitb.ac.in'  # Sender's email address
+    from_email = 'dean@iitb.ac.in'  # Sender's email address
     recipient_list = [user_profile.roll_number+'@iitb.ac.in']  # Recipient's email address
     
     send_mail(subject, message, from_email, recipient_list)  
@@ -76,6 +105,7 @@ class RegisterUserView(APIView):
                 user.delete()
             
         user = User.objects.create_user(username=roll_number, password=password)
+        user.is_active = False
         user.save()
         mutable_copy = request.POST.copy()
         mutable_copy["user"] = user.id
@@ -86,10 +116,9 @@ class RegisterUserView(APIView):
             serializer.save()
             verification_token = generate_verification_token()
             user_profile = UserProfile.objects.get(user=user)
-            user_profile.verification_token = 'test'
+            user_profile.verification_token = verification_token
             user_profile.save()
-            print(verification_token)
-            # send_verification_email(user_profile)
+            send_verification_email(user_profile)
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
@@ -154,7 +183,7 @@ class CreateUserProfileView(APIView):
 class CustomTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
         mutable_copy = request.POST.copy()
-        mutable_copy["username"] = mutable_copy["roll_number"].lower()
+        mutable_copy["username"] = mutable_copy["username"].lower()
         response = super().post(request, *args, **kwargs)
         if "access" in response.data:
             access_token = response.data["access"]
