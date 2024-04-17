@@ -14,6 +14,7 @@ import ProjectForm from "./pages/ProjectForm";
 import Register from "./pages/Register";
 import ProjectDetails from "./pages/ProjectDetails";
 import PreferenceForm from "./pages/PreferenceForm";
+import VerifyEmail from "./pages/VerifyEmail";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Textform />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/verify-email/:token" element={<VerifyEmail/>}/>
           <Route path="/login" element={<Login />} />
           <Route path="/current_projects" element={<Projects />}>
             <Route path=":ProjectId" element={<ProjectDetails />} />

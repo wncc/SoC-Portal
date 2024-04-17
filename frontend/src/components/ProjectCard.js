@@ -51,14 +51,14 @@ export default function ProjectCard(props) {
   return (
     <div>
       <article className="overflow-hidden rounded-lg shadow transition hover:shadow-lg">
-        <a href={`/current_projects/project${props.ProjectId}`}>
+        <a href={`/current_projects/${props.ProjectId}`}>
           <img
             alt={props.title}
             src={props.link}
             className="h-56 w-full object-cover"
           />
         </a>
-        <a href={`/current_projects/project${props.ProjectId}`}>
+        <a href={`/current_projects/${props.ProjectId}`}>
           <div className="bg-white p-4 sm:p-6">
             <h3 className="mt-0.5 text-lg line-clamp-1 text-gray-900">
               {props.title}

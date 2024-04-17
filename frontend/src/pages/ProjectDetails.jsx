@@ -1,6 +1,6 @@
 import React from 'react';
 import ProjectTimeline from '../components/ProjectTimeline';
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
 import axios from "axios";
 import ProjectTitle from '../components/ProjectTitle';
 import WishlistButton from '../components/WishlistButton'
@@ -13,7 +13,7 @@ export default function ProjectDetails() {
 
     useEffect(() => {
         // Make an HTTP request to fetch the card image from the backend
-        axios.get('/api/projects/')
+        axios.get('/api/projects/:id')
         .then((response) => {
             // Assuming the response contains the image URL
             console.log(response.data);
