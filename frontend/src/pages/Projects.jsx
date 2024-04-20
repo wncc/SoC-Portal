@@ -103,8 +103,6 @@ export default function Projects() {
 
 
   return (<section className="project-card " >
-    <Outlet/>
-    
 
     <div className="pt-8 flex items-center justify-center ">
       <div className="inline-flex sm:flex-wrap rounded-md shadow-sm" role="group">

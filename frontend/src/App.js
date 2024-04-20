@@ -62,9 +62,8 @@ export default function App() {
           </Route>
           <Route element={<ProtectedRoutes authToken={authToken}/>}>
             <Route path="/" element={<Textform />} />
-            <Route path="/current_projects" element={<Projects />}>
-              <Route path=":ProjectId" element={<ProjectDetails />} />
-            </Route>
+            <Route path="/current_projects" element={<Projects />}/>
+            <Route path="/current_projects/:ProjectId" element={<ProjectDetails />} />
             <Route path="/wishlist" element={<Wishlist />}/>
             {/* <Route path="/course" element={<Courses />} />
             <Route path="/live" element={<Live />} />
