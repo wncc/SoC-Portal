@@ -17,6 +17,7 @@ import PreferenceForm from "./pages/PreferenceForm";
 import VerifyEmail from "./pages/VerifyEmail";
 import RegisterSuccess from "./pages/RegisterSuccess";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import LoginRoute from "./components/LoginRoute";
 import PreferenceFormFilled from "./pages/PreferenceFormFilled";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -53,10 +54,12 @@ export default function App() {
       <div class="background">
         <Navbar title="SOC" />
         <Routes>
-          <Route path="/register" element={<Register />} />
-          <Route path="/registerSuccess" element={<RegisterSuccess />} />
-          <Route path="/verify-email/:token" element={<VerifyEmail />} />
-          <Route path="/login" element={<Login />} />
+          <Route element={<LoginRoute authToken={authToken}/>}>
+            <Route path="/register" element={<Register />} />
+            <Route path="/registerSuccess" element={<RegisterSuccess />} />
+            <Route path="/verify-email/:token" element={<VerifyEmail />} />
+            <Route path="/login" element={<Login />} />
+          </Route>
           <Route element={<ProtectedRoutes authToken={authToken}/>}>
             <Route path="/" element={<Textform />} />
             <Route path="/current_projects" element={<Projects />}>
