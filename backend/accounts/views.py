@@ -129,7 +129,7 @@ class RegisterUserView(APIView):
             user_profile = UserProfile.objects.get(user=user)
             user_profile.verification_token = verification_token
             user_profile.save()
-            send_verification_email(user_profile)
+            # send_verification_email(user_profile)
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
