@@ -17,6 +17,7 @@ export default function Register() {
     // States for checking the errors
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
+    const [error1, setError1] = useState(false);
     const [years, setYears] = useState([]);
     const [departments, setDepartments] = useState([]);
 
@@ -60,9 +61,11 @@ export default function Register() {
 
         if (profile.name === '' || profile.password === '' || profile.phone_number === '' || profile.roll_number === '' || profile.year==='' || profile.department==='') {
             setError(true);
+            setError1(false);
         } else {
             setSubmitted(true);
             setError(false);
+            setError1(false);
         }
         axios.post('/api/accounts/register/', formData)
             .then(res => {
@@ -70,7 +73,12 @@ export default function Register() {
                 console.log(res)
                 
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                if(err.response.data.error==="User already exists"){
+                    setError1(true)
+                }
+            })
     };
 
     // Showing success message
@@ -96,7 +104,42 @@ export default function Register() {
                 style={{
                     display: error ? '' : 'none',
                 }}>
-                <h1>Please enter all the fields</h1>
+                <div role="alert" className="rounded border-s-4 border-red-500 bg-red-50 p-4">
+                    <div className="flex items-center gap-2 text-red-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
+                        <path
+                            fillRule="evenodd"
+                            d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                            clipRule="evenodd"
+                        />
+                        </svg>
+
+                        <strong className="block font-medium"> All fields required </strong>
+                    </div>
+                </div>
+            </div>
+        );
+    };
+    const errorMessage1 = () => {
+        return (
+            <div
+                className="error"
+                style={{
+                    display: error1 ? '' : 'none',
+                }}>
+                <div role="alert" className="rounded border-s-4 border-red-500 bg-red-50 p-4">
+                    <div className="flex items-center gap-2 text-red-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
+                        <path
+                            fillRule="evenodd"
+                            d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                            clipRule="evenodd"
+                        />
+                        </svg>
+
+                        <strong className="block font-medium"> User already exists </strong>
+                    </div>
+                </div>
             </div>
         );
     };
@@ -112,6 +155,7 @@ export default function Register() {
             {/* Calling to the methods */}
             <div className="messages">
                 {errorMessage()}
+                {errorMessage1()}
                 {/* {successMessage()} */}
             </div>
 

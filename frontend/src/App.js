@@ -66,8 +66,8 @@ export default function App() {
             {/* <Route path="/course" element={<Courses />} />
             <Route path="/live" element={<Live />} />
             <Route path="/contact" element={<Contact />} /> */}
-            <Route path="/previous_projects" element={<Login />} />
-            <Route path="/Dashboard" element={<Dashboard />} />
+            {/* <Route path="/previous_projects" element={<Login />} />
+            <Route path="/Dashboard" element={<Dashboard />} /> */}
             {/* <Route path="/Dashboard/ProjectForm" element={<ProjectForm />} /> */}
             <Route path="/PreferenceForm" element={<PreferenceForm />} />
             <Route path="/PreferenceFormFilled" element={<PreferenceFormFilled />} />
