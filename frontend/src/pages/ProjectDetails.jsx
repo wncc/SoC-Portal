@@ -1,22 +1,46 @@
 import React from 'react';
 import ProjectTimeline from '../components/ProjectTimeline';
-import { useState , useEffect} from 'react';
+import { useState , useEffect } from 'react';
 import axios from "axios";
 import ProjectTitle from '../components/ProjectTitle';
 import WishlistButton from '../components/WishlistButton'
+import { useParams } from 'react-router-dom';
 
 
 export default function ProjectDetails() {
 
     const [Added, setAdded] = useState(false);
-    const [details, setDetails] = useState();
+    const [details, setDetails] = useState({
+        "id": 1,
+        "created": "2024-04-17T07:51:36.572198Z",
+        "title": "lauda",
+        "general_category": "ML",
+        "specific_category": "NA",
+        "mentee_max": "23",
+        "mentor": "NA",
+        "description": "NA",
+        "timeline": "NA",
+        "checkpoints": "NA",
+        "prereuisites": "NA",
+        "co_mentor_info": "NA",
+        "banner_image": null,
+        "code": "3b0fe016",
+        "season": 1
+    });
+    let {ProjectId} = useParams();
+    ProjectId = parseInt(ProjectId);
+
 
     useEffect(() => {
         // Make an HTTP request to fetch the card image from the backend
-        axios.get('/api/projects/:id')
+        axios.get(`/api/projects/${ProjectId}/`)
         .then((response) => {
             // Assuming the response contains the image URL
             console.log(response.data);
+            const descriptionWithLinks = response.data.description.replace(
+                /(https?:\/\/[^\s]+)/g,
+                '<a href="$1" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">$1</a>'
+            );
             setDetails(response.data);
         })
         .catch((error) => {
@@ -41,52 +65,49 @@ export default function ProjectDetails() {
     //     "code": "34d591dd",//no use
     //     "season": 1//no use
     // }
-    const req_details = {
-        "id": details.id,
-        "title": details.title,
-        "banner_image": details.banner_image,
-        "general_category": details.general_category
-    }
+    // const req_details = {
+    //     "id": details.id,
+    //     "title": details.title,
+    //     "banner_image": details.banner_image,
+    //     "general_category": details.general_category
+    // }
 
-    const descriptionWithLinks = details.description.replace(
-        /(https?:\/\/[^\s]+)/g,
-        '<a href="$1" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">$1</a>'
-    );
+   
 
     //if project is in users wishlist then return true, else false
-    const search = () =>{
-        axios.get(`api/user/wishlist/:${details.id}`)
-        .then(res => {
-            setAdded(res)
-        })
-        .catch(err => console.log(err))
-    }
-    search();
-    const buttonMessage = Added ? "Remove From Wishlist" : "Add To Wishlist";
-    const [str, setStr] = useState([buttonMessage]);
-    let title = details.title;
+    // const search = () =>{
+    //     axios.get(`api/user/wishlist/:${details.id}`)
+    //     .then(res => {
+    //         setAdded(res)
+    //     })
+    //     .catch(err => console.log(err))
+    // }
+    // search();
+    // const buttonMessage = Added ? "Remove From Wishlist" : "Add To Wishlist";
+    // const [str, setStr] = useState([buttonMessage]);
+    // let title = details.title;
 
 
     const WishlistAdd = (e) => {
-        console.log(details);
-        if(!Added){
-            axios.post('api/user/wishlist/', req_details)
-                .then(res => {
-                    console.log(res)
-                    setAdded(true)
-                    setStr([`mv ${title.replace(/\s+/g, '_')}.txt ./Wishlist`, "Remove From Wishlist"]);
-                })
-                .catch(err => console.log(err))
-            }
-            else{
-                axios.delete(`api/user/wishlist/:${details.id}`)
-                .then(res => {
-                    console.log(res)
-                    setAdded(false)
-                    setStr(["cd ./Wishlist", `rm ${title}.txt`, "Add To Wishlist"]);
-                })
-                .catch(err => console.log(err))
-            }
+        // console.log(details);
+        // if(!Added){
+        //     axios.post('/api/user/wishlist/', )
+        //         .then(res => {
+        //             console.log(res)
+        //             setAdded(true)
+        //             setStr([`mv ${title.replace(/\s+/g, '_')}.txt ./Wishlist`, "Remove From Wishlist"]);
+        //         })
+        //         .catch(err => console.log(err))
+        //     }
+        //     else{
+        //         axios.delete(`/api/user/wishlist/:${details.id}`)
+        //         .then(res => {
+        //             console.log(res)
+        //             setAdded(false)
+        //             setStr(["cd ./Wishlist", `rm ${title}.txt`, "Add To Wishlist"]);
+        //         })
+        //         .catch(err => console.log(err))
+        //     }
     }
 
     
@@ -146,7 +167,7 @@ export default function ProjectDetails() {
                                 </ul>
                             </div>
                         </div>
-                        <WishlistButton str={str} WishlistAdd={WishlistAdd}/>
+                        {/* <WishlistButton str={str} WishlistAdd={WishlistAdd}/> */}
 
                     </div>
                 </div>
@@ -166,7 +187,7 @@ export default function ProjectDetails() {
                     <dl className="-my-3 divide-y divide-gray-100 text-sm">
                         <div className="grid grid-cols-1 gap-1 py-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
                             <dt className="text-2xl text-indigo-600 sm:text-3xl">Description</dt>
-                            <dd className="text-gray-700 sm:col-span-2"><p dangerouslySetInnerHTML={{ __html: descriptionWithLinks.replace(/\r\n/g, "<br>") }}></p></dd>
+                            <dd className="text-gray-700 sm:col-span-2"><p dangerouslySetInnerHTML={{ __html: details.description.replace(/\r\n/g, "<br>") }}></p></dd>
                         </div>
 
                         <div className="grid grid-cols-1 gap-1 py-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">

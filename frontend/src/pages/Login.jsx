@@ -1,18 +1,22 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Dashboard from '../components/Dashboard';
+import Cookie from "js-cookie";
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function Login() {
 
     // States for registration
     // role: 1 for mentor, 0 for mentee
     const [profile, setProfile] = useState({
-        roll_number: '',
+        username: '',
         password: '',
     });
 
     // States for checking the errors
     const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState(false);
+    const navigate = useNavigate();
 
 
     // Handling the name change
@@ -30,110 +34,86 @@ export default function Login() {
     const handleSubmit = (e) => {
         console.log(profile);
         e.preventDefault();
-        axios.post('api/accounts/token/', profile)
+        const formData = new FormData();
+
+        Object.keys(profile).forEach(key => {
+            formData.append(key, profile[key]);
+        });
+        axios.post('api/accounts/token/', formData)
             .then(function (profile) {
                 console.log(profile.status)
-                if (profile.status === 200) {
-                    window.location.href = '/Dashboard'
-
-                }
-                else {
-                    <h1 className='text-center text-red-600'>
-                        wrong username or password!
-                    </h1>
-                }
+                setError(false)
+                window.location.href = '/'
             }
             ).catch(err => {
-                alert(err.response.data.detail)
+                console.log(err);
+                setError(true);
             })
 
 
 
     };
 
-    const role0 = () => {
-        profile.role = 0;
-    }
 
-    const role1 = () => {
-        profile.role = 1;
-    }
+    // Showing success message
+    const errorMessage = () => {
+        return (
+            <div
+                className="error"
+                style={{
+                    display: error ? '' : 'none',
+                }}>
+                <div role="alert" className="rounded border-s-4 border-red-500 bg-red-50 p-4">
+                    <div className="flex items-center gap-2 text-red-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
+                        <path
+                            fillRule="evenodd"
+                            d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                            clipRule="evenodd"
+                        />
+                        </svg>
 
-
-    // // Showing success message
-    // const successMessage = () => {
-    //     return (
-    //         <>
-    //             <div
-    //                 className="success"
-    //                 style={{
-    //                     display: submitted && profile.role ? '' : 'none',
-    //                 }}>
-    //                 <h1>You have successfully registered as an SoC mentor!!</h1>
-    //             </div>
-    //             <div
-    //                 className="success"
-    //                 style={{
-    //                     display: submitted && !profile.role ? '' : 'none',
-    //                 }}>
-    //                 <h1>You have successfully registered as an SoC mentee!!</h1>
-    //             </div>
-    //         </>
-    //     );
-    // };
-
-    // Showing error message if error is true
+                        <strong className="block font-medium"> Wrong Username or Password </strong>
+                    </div>
+                </div>
+            </div>
+        );
+    };
 
     return (
         <div className="form ">
 
             {/* Calling to the methods */}
-            {/* <div className="messages">
+            <div className="messages">
 
-                {successMessage()}
-            </div> */}
+                {errorMessage()}
+            </div>
 
             <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-lg">
-                    <h1 className="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">&lt;/&gt;Seasons of Code&lt;/&gt;</h1>
+                <h1 className="text-center text-2xl font-bold text-indigo-600 sm:text-3xl flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                        </svg>
+                            <span className="mx-3">Seasons of Code</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                        </svg>
+                        </h1>
                     
 
                     <form onSubmit={handleSubmit} className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
                         <p className="text-center text-lg font-medium">Login to your account</p>
 
-                        <div className="grid grid-cols-1 gap-4 text-center sm:grid-cols-2">
-                            <div>
-                                <label
-                                    for="Option1"
-                                    className="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-indigo-600 has-[:checked]:text-white"
-                                    tabindex="0"
-                                >
-                                    <input className="sr-only" id="Option1" type="radio" tabindex="-1" name="option" onClick={role0} defaultChecked />
-
-                                    <span className="text-sm"> Mentee </span>
-                                </label>
-                            </div>
-
-                            <div>
-                                <label
-                                    for="Option2"
-                                    className="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-indigo-600 has-[:checked]:text-white"
-                                    tabindex="0"
-                                >
-                                    <input className="sr-only" id="Option2" type="radio" tabindex="-1" name="option" onClick={role1} />
-
-                                    <span className="text-sm"> Mentor </span>
-                                </label>
-                            </div>
-                        </div>
+                    
 
                         <div>
-                            <label for="text" className="sr-only" >Roll No.</label>
+                            <label for="text" >Roll No.</label>
 
                             <div className="relative">
                                 <input
                                     type="text"
-                                    id="roll_number"
+                                    id="username"
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                                     placeholder="Enter Roll No."
                                     onChange={handleProfile}
@@ -144,7 +124,7 @@ export default function Login() {
                         </div>
 
                         <div>
-                            <label for="password" className="sr-only">Password</label>
+                            <label for="password">Password</label>
 
                             <div className="relative">
                                 <input

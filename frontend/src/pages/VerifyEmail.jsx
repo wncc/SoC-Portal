@@ -7,9 +7,9 @@ const VerifyEmail = () => {
 
   useEffect(() => {
     console.log('Token:', token);
-    axios.get(`http://127.0.0.1:8000/api/accounts/verify-email/${token}`)
+    axios.get(`/api/accounts/verify-email/${token}`)
     .then((res) => {
-        // window.location.href = '/login'
+        window.location.href = '/login'
         console.log(res.data)
     })
     .catch(err => console.log(err))

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function Register() {
@@ -6,18 +6,36 @@ export default function Register() {
     // States for registration
     // role: 1 for mentor, 0 for mentee
     const [profile, setProfile] = useState({
-        role: '0',
         name: '',
         roll_number: '',
-        phone: '',
-        email: '',
+        phone_number: '',
         password: '',
-        yearOfStudy: '',
+        year: '',
+        department: '',
     });
 
     // States for checking the errors
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
+    const [years, setYears] = useState([]);
+    const [departments, setDepartments] = useState([]);
+
+    useEffect(() => {
+        axios.get('/api/accounts/years')
+        .then((res) => {
+            setYears(res.data)
+        })
+        .catch(err => console.log(err))
+      }, []);
+
+    useEffect(() => {
+        axios.get('/api/accounts/departments')
+        .then((res) => {
+            setDepartments(res.data)
+        })
+        .catch(err => console.log(err))
+      }, []);
+
 
     // Handling the name change
     const handleProfile = (e) => {
@@ -34,41 +52,41 @@ export default function Register() {
     const handleSubmit = (e) => {
         console.log(profile);
         e.preventDefault();
-        if (profile.name === '' || profile.email === '' || profile.password === '' || profile.phone === '' || profile.roll_number === '' || profile.yearOfStudy) {
+        const formData = new FormData();
+
+        Object.keys(profile).forEach(key => {
+            formData.append(key, profile[key]);
+        });
+
+        if (profile.name === '' || profile.password === '' || profile.phone_number === '' || profile.roll_number === '' || profile.year==='' || profile.department==='') {
             setError(true);
         } else {
             setSubmitted(true);
             setError(false);
         }
-        axios.post('api/accounts/register/', profile)
+        axios.post('/api/accounts/register/', formData)
             .then(res => {
-                window.location.href = '/'
+                window.location.href = '/registerSuccess'
                 console.log(res)
+                
             })
             .catch(err => console.log(err))
     };
 
     // Showing success message
-    const successMessage = () => {
-        return (
-            <>
-                <div
-                    className="success"
-                    style={{
-                        display: submitted && profile.role ? '' : 'none',
-                    }}>
-                    <h1>You have successfully registered as an SoC mentor!!</h1>
-                </div>
-                <div
-                    className="success"
-                    style={{
-                        display: submitted && !profile.role ? '' : 'none',
-                    }}>
-                    <h1>You have successfully registered as an SoC mentee!!</h1>
-                </div>
-            </>
-        );
-    };
+    // const successMessage = () => {
+    //     return (
+    //         <>
+    //             <div
+    //                 className="success"
+    //                 style={{
+    //                     display: submitted ? '' : 'none',
+    //                 }}>
+    //                 <h1>You have successfully registered as an SoC mentee!!</h1>
+    //             </div>
+    //         </>
+    //     );
+    // };
 
     // Showing error message if error is true
     const errorMessage = () => {
@@ -94,7 +112,7 @@ export default function Register() {
             {/* Calling to the methods */}
             <div className="messages">
                 {errorMessage()}
-                {successMessage()}
+                {/* {successMessage()} */}
             </div>
 
 
@@ -137,7 +155,7 @@ export default function Register() {
                             <div className="relative">
                                 <input
                                     type="text"
-                                    id='first_name'
+                                    id='name'
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                                     placeholder="Enter Your Name"
                                     onChange={handleProfile}
@@ -164,28 +182,12 @@ export default function Register() {
                         </div>
 
                         <div>
-                            <label for="email">Email Address</label>
-
-                            <div className="relative">
-                                <input
-                                    type="email"
-                                    id='email'
-                                    className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                                    placeholder="Enter Email"
-                                    onChange={handleProfile}
-                                    required
-                                />
-
-                            </div>
-                        </div>
-
-                        <div>
                             <label for="phone"  >Phone No.</label>
 
                             <div className="relative">
                                 <input
                                     type="tel"
-                                    id='phone'
+                                    id='phone_number'
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                                     placeholder="Enter Mobile No.(preferably WhatsApp)"
                                     onChange={handleProfile}
@@ -212,15 +214,21 @@ export default function Register() {
                             </div>
                         </div>
                         <div className="inline-block relative w-full">
-                        <label for="yearOfStudy">Year of Study</label>
-                            <select id="yearOfStudy" onChange={handleProfile} className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" required>
+                        <label for="year">Year of Study</label>
+                            <select id="year" onChange={handleProfile} className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" required>
                                 <option disabled selected>Select Year of Study</option>   
-                                <option value="UG 1st Year">UG 1st Year</option>
-                                <option value="UG 2nd Year">UG 2nd Year</option>
-                                <option value="UG 3rd Year">UG 3rd Year</option>
-                                <option value="UG 4th Year">UG 4th Year</option>
-                                <option value="DD 5th Year">DD 5th Year</option>
-                                <option value="Masters/PhD">Masters/PhD</option>
+                                {years.flat().filter((year, index, self) => self.indexOf(year) === index).map((year, index) => (
+                                    <option key={index} value={year}>{year}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="inline-block relative w-full">
+                        <label for="department">Department</label>
+                            <select id="department" onChange={handleProfile} className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" required>
+                                <option disabled selected>Select Department</option>   
+                                {departments.flat().filter((department, index, self) => self.indexOf(department) === index).map((department, index) => (
+                                    <option key={index} value={department}>{department}</option>
+                                ))}
                             </select>
                         </div>
 

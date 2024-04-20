@@ -20,6 +20,12 @@ from .serializers import RegisterUserSerializer, UserAutoCompleteSerializer, Use
 from projects.models import Mentee
 
 from .options import DepartmentChoices, YearChoices
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+from django.contrib.auth.models import AnonymousUser
+
+
 
 
 
@@ -45,8 +51,13 @@ class YearListAPIView(APIView):
         years = YearChoices.choices
         return Response(years)
 
-
-
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def isloggedin(request):
+    if isinstance(request.user, AnonymousUser):
+        return JsonResponse({"status": "NO"}, status=200)
+    else:
+        return JsonResponse({"status": "YES"}, status=200)
 
 def generate_verification_token():
     return get_random_string(length=32)

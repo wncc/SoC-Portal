@@ -48,7 +48,7 @@ class ProjectWishlist(APIView):
     def delete(self, request):
         user_profile = UserProfile.objects.get(user=request.user)
         mentee = Mentee.objects.get(user=user_profile)
-        project_id = request.data["project_id"]
+        project_id = request.GET['project_id']
         project = Project.objects.get(pk=project_id)
         preference = MenteeWishlist.objects.get(mentee=mentee, project=project)
         preference.delete()

@@ -14,4 +14,6 @@ urlpatterns = [
     path("verify-email/<str:token>/", views.verify_email, name="verify_email"),
     path('departments/', views.DepartmentListAPIView.as_view(), name='department-list'),
     path('years/', views.YearListAPIView.as_view(), name='year-list'),
+    path('isloggedin/', views.isloggedin, name='loginstatus'),
+
 ]

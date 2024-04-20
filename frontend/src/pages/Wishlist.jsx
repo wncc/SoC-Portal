@@ -7,7 +7,7 @@ import { useMemo } from "react";
 import "../components/ProjectCard.css";
 import {Outlet} from 'react-router-dom'
 
-export default function Projects() {
+export default function Wishlist() {
 
   const [details, setDetails] = useState([]);
   const [wishlist, setWishlist] = useState([]);
@@ -15,7 +15,7 @@ export default function Projects() {
 
   useEffect(() => {
     // Make an HTTP request to fetch the card image from the backend
-    axios.get('/api/projects/')
+    axios.get('/api/projects/wishlist')
       .then((response) => {
         // Assuming the response contains the image URL
         console.log(response.data);
