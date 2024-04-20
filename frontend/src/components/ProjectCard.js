@@ -31,7 +31,7 @@ export default function ProjectCard(props) {
       console.log(formData)
     
       axios
-        .post("api/projects/wishlist/", formData)
+        .post("/api/projects/wishlist/", formData)
         .then((res) => {
           console.log(res);
           setAdded(true);
@@ -40,7 +40,7 @@ export default function ProjectCard(props) {
     } 
     else {
     
-      axios.delete(`api/projects/wishlist?project_id=${props.ProjectId}`)
+      axios.delete(`/api/projects/wishlist?project_id=${props.ProjectId}`)
         .then((res) => {
           console.log(res);
           setAdded(false);
@@ -55,7 +55,7 @@ export default function ProjectCard(props) {
           <img
             alt={props.title}
             src={props.link}
-            className="h-56 w-full object-cover"
+            className="h-56 w-full object-contain"
           />
         </a>
         <a href={`/current_projects/${props.ProjectId}`}>
@@ -68,7 +68,9 @@ export default function ProjectCard(props) {
         <div className="p-4 sm:p-6">
         <button
           onClick={WishlistAdd}
-          class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded inline-flex items-center"
+          className={`text-white font-bold ${
+            buttonMessage === "Remove From Wishlist" ? "bg-red-600 hover:bg-red-700" : "bg-indigo-600 hover:bg-indigo-700"
+          } text-white font-bold py-2 px-4 rounded inline-flex items-center`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

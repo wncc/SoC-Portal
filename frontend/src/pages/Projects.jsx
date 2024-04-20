@@ -135,7 +135,13 @@ export default function Projects() {
       <ProjectCard ProjectId="4" general_category="CP" link="https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" title="How to position your furniture for positivity"/>
       <ProjectCard ProjectId="5" general_category="Others" link="https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" title="How to position your furniture for positivity"/>
     </div> */}
-    {isLoading ? <p>Loading...</p> : <div className="px-24 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8 py-20">
+    {isLoading ? <div className="h-screen flex justify-center items-center">
+        <div class="flex gap-2">
+          <div class="w-5 h-5 rounded-full animate-pulse bg-blue-600"></div>
+          <div class="w-5 h-5 rounded-full animate-pulse bg-blue-600"></div>
+          <div class="w-5 h-5 rounded-full animate-pulse bg-blue-600"></div>
+        </div>
+      </div> : <div className="px-24 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8 py-20">
     {/* {details.map((details, index) => (
       <div key={index}>
         <ProjectCard ProjectId={`project+${details.id}`} link={details.banner_image} title={details.title} description={details.props} />
