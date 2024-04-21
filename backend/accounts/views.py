@@ -31,6 +31,7 @@ from django.contrib.auth.models import AnonymousUser
 
 
 from django.utils.crypto import get_random_string
+import os
 
 
 # views.py
@@ -86,7 +87,7 @@ def send_verification_email(user_profile):
     
     Please click on the link below to verify your email address and complete your registration.
     
-    http://localhost:3000/verify-email/{user_profile.verification_token}
+    {os.getenv('DOMAIN_NAME')}/verify-email/{user_profile.verification_token}
     
     Regards,
     SOC Menteee Team"""
@@ -95,6 +96,11 @@ def send_verification_email(user_profile):
     
     send_mail(subject, message, from_email, recipient_list)  
     
+
+def logout(request):
+    response = JsonResponse({"success": "logged out"}, status=200)
+    response.delete_cookie(SIMPLE_JWT["AUTH_COOKIE"])
+    return response
 
 
 class RegisterUserView(APIView):
@@ -129,7 +135,7 @@ class RegisterUserView(APIView):
             user_profile = UserProfile.objects.get(user=user)
             user_profile.verification_token = verification_token
             user_profile.save()
-            # send_verification_email(user_profile)
+            send_verification_email(user_profile)
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 

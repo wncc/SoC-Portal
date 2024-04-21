@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Textform from "./components/Textform";
 import Reviews from "./components/Reviews";
 import Login from "./pages/Login";
+import Logout from "./pages/Logout";
 import Projects from "./pages/Projects";
 import "./components/scrollable.css";
 import Button from "./components/Button";
@@ -52,16 +53,17 @@ export default function App() {
   return (
     <>
       <div class="background">
-        <Navbar title="SOC" />
+        <Navbar title="SOC" authToken={authToken}/>
         <Routes>
           <Route element={<LoginRoute authToken={authToken}/>}>
+            <Route path="/" element={<Textform />} />
             <Route path="/register" element={<Register />} />
             <Route path="/registerSuccess" element={<RegisterSuccess />} />
             <Route path="/verify-email/:token" element={<VerifyEmail />} />
             <Route path="/login" element={<Login />} />
           </Route>
           <Route element={<ProtectedRoutes authToken={authToken}/>}>
-            <Route path="/" element={<Textform />} />
+            
             <Route path="/current_projects" element={<Projects />}/>
             <Route path="/current_projects/:ProjectId" element={<ProjectDetails />} />
             <Route path="/wishlist" element={<Wishlist />}/>
@@ -73,6 +75,7 @@ export default function App() {
             {/* <Route path="/Dashboard/ProjectForm" element={<ProjectForm />} /> */}
             <Route path="/PreferenceForm" element={<PreferenceForm />} />
             <Route path="/PreferenceFormFilled" element={<PreferenceFormFilled />} />
+            <Route path="/logout" element={<Logout />} />
           </Route>
         </Routes>
 

@@ -12,7 +12,10 @@ const VerifyEmail = () => {
         window.location.href = '/login'
         console.log(res.data)
     })
-    .catch(err => console.log(err))
+    .catch(err =>{ console.log(err)
+      window.location.href = '/login'
+  }
+)
   }, [token]);
 
   return (

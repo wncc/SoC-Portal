@@ -15,5 +15,6 @@ urlpatterns = [
     path('departments/', views.DepartmentListAPIView.as_view(), name='department-list'),
     path('years/', views.YearListAPIView.as_view(), name='year-list'),
     path('isloggedin/', views.isloggedin, name='loginstatus'),
+    path('logout/', views.logout, name='logout'),
 
 ]
