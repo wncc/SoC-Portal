@@ -108,10 +108,11 @@ class Mentee(models.Model):
     A Mentee is the representation of a user in a season applying to projects.
     """
 
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         UserProfile,
         on_delete=models.CASCADE,
         help_text="The user corresponding to the mentee.",
+        unique=True,
     )
     season = models.ForeignKey(
         Season,
