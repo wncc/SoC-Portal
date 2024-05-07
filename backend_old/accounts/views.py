@@ -6,7 +6,7 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated as isAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from backend.settings import SIMPLE_JWT
+from socbackend.settings import SIMPLE_JWT
 
 from .models import User
 from .serializers import RegisterUserSerializer, UserAutoCompleteSerializer

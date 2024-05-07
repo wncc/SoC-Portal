@@ -31,7 +31,7 @@ def confirm_action():
 
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "socbackend.settings")
     if not confirm_action():
         print("Script execution aborted.")
         exit()

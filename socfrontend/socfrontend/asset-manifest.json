@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/wncc-soc/static/css/main.aa6b0995.css",
+    "main.js": "/wncc-soc/static/js/main.8a6b8219.js",
+    "static/js/787.736e6f0f.chunk.js": "/wncc-soc/static/js/787.736e6f0f.chunk.js",
+    "static/media/wncc-logo.png": "/wncc-soc/static/media/wncc-logo.edd0b62f6358ab3eb8b6.png",
+    "index.html": "/wncc-soc/index.html",
+    "main.aa6b0995.css.map": "/wncc-soc/static/css/main.aa6b0995.css.map",
+    "main.8a6b8219.js.map": "/wncc-soc/static/js/main.8a6b8219.js.map",
+    "787.736e6f0f.chunk.js.map": "/wncc-soc/static/js/787.736e6f0f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.aa6b0995.css",
+    "static/js/main.8a6b8219.js"
+  ]
+}
