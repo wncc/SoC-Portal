@@ -91,7 +91,7 @@ def send_verification_email(user_profile):
     
     Regards,
     SOC Menteee Team"""
-    from_email = 'dean@iitb.ac.in'  # Sender's email address
+    from_email = 'wncc@iitb.ac.in'  # Sender's email address
     recipient_list = [user_profile.roll_number+'@iitb.ac.in']  # Recipient's email address
     
     send_mail(subject, message, from_email, recipient_list)  

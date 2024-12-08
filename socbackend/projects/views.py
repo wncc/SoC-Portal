@@ -3,7 +3,7 @@ from rest_framework import generics
 from .models import Project
 from .serializers import ProjectSerializer, BasicProjectSerializer, MenteePreferenceSerializer, MenteePreferenceSaveSerializer
 
-from projects.models import Season
+# from projects.models import Season
 from rest_framework import generics, views
 from rest_framework.response import Response
 from rest_framework.views import APIView

@@ -8,64 +8,64 @@ from django.utils import timezone
 from accounts.models import UserProfile
 
 
-def default_season_name():
-    now = timezone.now()
-    is_winter = now.month >= 10 or now.month <= 2
-    return "{}SOC {}".format("W" if is_winter else "", now.year)
+# def default_season_name():
+#     now = timezone.now()
+#     is_winter = now.month >= 10 or now.month <= 2
+#     return "{}SOC {}".format("W" if is_winter else "", now.year)
 
 
 # Hard-coded value for the current active season, since we assume this doesn't change over a long period
-CURRENT_ACTIVE_SEASON_ID = settings.PORTAL_SETTINGS["CURRENT_ACTIVE_SEASON_ID"]
+# CURRENT_ACTIVE_SEASON_ID = settings.PORTAL_SETTINGS["CURRENT_ACTIVE_SEASON_ID"]
 
 
-class SeasonManager(models.Manager):
-    def current(self, hard_coded=True):
-        """
-        Method to get the currently active Season. Has a hacky implementation using the
-        hard-coded Season ID, which can be overriden by setting hard_coded to False
-        """
-        if hard_coded:
-            return self.get(id=CURRENT_ACTIVE_SEASON_ID)
-        return self.get(is_active=True)
+# class SeasonManager(models.Manager):
+#     def current(self, hard_coded=True):
+#         """
+#         Method to get the currently active Season. Has a hacky implementation using the
+#         hard-coded Season ID, which can be overriden by setting hard_coded to False
+#         """
+#         if hard_coded:
+#             return self.get(id=CURRENT_ACTIVE_SEASON_ID)
+#         return self.get(is_active=True)
 
-    def current_id(self, hard_coded=True):
-        """
-        Method to get the currently active Season ID. Has a hacky implementation using the
-        hard-coded Season ID, which can be overriden by setting hard_coded to False
-        """
-        if hard_coded:
-            return CURRENT_ACTIVE_SEASON_ID
-        return self.get(is_active=True).id
-
-
-class Season(models.Model):
-    """
-    Model representing a Seasons of Code event. Used by projects to
-    reference which event they belonged to, and to control the apprearence of
-    the dashboard as the event progresses.
-    """
-
-    name = models.CharField(max_length=100, default=default_season_name)
-    is_active = models.BooleanField(default=False)
-    objects = SeasonManager()
-
-    class StatusChoices(models.IntegerChoices):
-        YET_TO_START = 0
-        MENTOR_REGISTRATION = 10
-        MID_MENTOR_MENTEE = 15
-        MENTEE_REGISTRATION = 20
-        ONGOING = 30
-
-    status = models.IntegerField(
-        default=StatusChoices.YET_TO_START, choices=StatusChoices.choices
-    )
-
-    def __str__(self):
-        return self.name
+#     def current_id(self, hard_coded=True):
+#         """
+#         Method to get the currently active Season ID. Has a hacky implementation using the
+#         hard-coded Season ID, which can be overriden by setting hard_coded to False
+#         """
+#         if hard_coded:
+#             return CURRENT_ACTIVE_SEASON_ID
+#         return self.get(is_active=True).id
 
 
-def get_current_id():
-    return Season.objects.current_id()
+# class Season(models.Model):
+#     """
+#     Model representing a Seasons of Code event. Used by projects to
+#     reference which event they belonged to, and to control the apprearence of
+#     the dashboard as the event progresses.
+#     """
+
+#     name = models.CharField(max_length=100, default=default_season_name)
+#     is_active = models.BooleanField(default=False)
+#     objects = SeasonManager()
+
+#     class StatusChoices(models.IntegerChoices):
+#         YET_TO_START = 0
+#         MENTOR_REGISTRATION = 10
+#         MID_MENTOR_MENTEE = 15
+#         MENTEE_REGISTRATION = 20
+#         ONGOING = 30
+
+#     status = models.IntegerField(
+#         default=StatusChoices.YET_TO_START, choices=StatusChoices.choices
+#     )
+
+#     def __str__(self):
+#         return self.name
+
+
+# def get_current_id():
+#     return Season.objects.current_id()
 
 
 def upload_to(instance, filename):
@@ -114,26 +114,26 @@ class Mentee(models.Model):
         help_text="The user corresponding to the mentee.",
         unique=True,
     )
-    season = models.ForeignKey(
-        Season,
-        on_delete=models.PROTECT,
-        default=get_current_id,
-        help_text="The season to which mentee is applying for.",
+    # season = models.ForeignKey(
+    #     Season,
+    #     on_delete=models.PROTECT,
+    #     default=get_current_id,
+    #     help_text="The season to which mentee is applying for.",
+    # )
+
+    project = models.ForeignKey(
+        "Project",
+        null=True,
+        on_delete=models.SET_NULL,
+        help_text="The project that the mentee has been selected for. Is NULL if not selected yet.",
     )
 
-    # project = models.ForeignKey(
-    #     Project,
-    #     null=True,
-    #     on_delete=models.SET_NULL,
-    #     help_text="The project that the mentee has been selected for. Is NULL if not selected yet.",
-    # )
-
-    # preferences = models.ManyToManyField(
-    #     "Project",
-    #     through="MenteePreference",
-    #     related_name="applications",
-    #     help_text="The projects that the mentee has applied to.",
-    # )
+    preferences = models.ManyToManyField(
+        "Project",
+        through="MenteePreference",
+        related_name="applications",
+        help_text="The projects that the mentee has applied to.",
+    )
 
 
     def __str__(self):
@@ -162,12 +162,12 @@ class Project(models.Model):
 
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=255, blank=False)
-    season = models.ForeignKey(
-        Season,
-        on_delete=models.PROTECT,
-        related_name="projects",
-        default=get_current_id,
-    )
+    # season = models.ForeignKey(
+    #     Season,
+    #     on_delete=models.PROTECT,
+    #     related_name="projects",
+    #     default=get_current_id,
+    # )
 
     # mentors = models.ManyToManyField(Mentor, through="MentorRequest")
 
@@ -200,7 +200,7 @@ class Project(models.Model):
     description = models.TextField(blank=False, default="NA")
     timeline = models.TextField(blank=False, default="NA")
     checkpoints = models.TextField(blank=False, default="NA")
-    prereuisites = models.TextField(blank=False, default="NA")
+    prerequisites = models.TextField(blank=False, default="NA")
     co_mentor_info = models.TextField(blank=False, default="NA")  
     banner_image = models.ImageField(upload_to=upload_to, blank=True, null=True)
 

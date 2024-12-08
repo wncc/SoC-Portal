@@ -136,10 +136,22 @@ SSO_BAD_CERT = True  # Set to False if you have a valid certificate
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        'NAME': os.getenv('DJANGO_DB_NAME', 'default_db_name'),
+        'USER': os.getenv('DJANGO_DB_USER', 'default_user'),
+        'PASSWORD': os.getenv('DJANGO_DB_PASSWORD', 'default_user'),
+        'HOST': os.getenv('DJANGO_DB_HOST', 'localhost'),
+        'PORT': os.getenv('DJANGO_DB_PORT', '5432'),
     }
 }
 
