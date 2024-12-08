@@ -1,7 +1,7 @@
 import React from "react";
 import api from '../utils/api';
 import { useState, useEffect } from "react";
-import PreferenceFormFilled from "../pages/PreferenceFormFilled"
+import PreferenceFormFilled from "./PreferenceFormFilled"
 import { Navigate } from "react-router-dom";
 
 

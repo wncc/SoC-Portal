@@ -1,0 +1,52 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres_container
+    restart: always
+    environment:
+      POSTGRES_USER: shivesh
+      POSTGRES_PASSWORD: shivesh
+      POSTGRES_DB: socdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  backend:
+    build:
+      context: ./socbackend
+      dockerfile: Dockerfile
+    volumes:
+      - ./socbackend:/app          # Mount the local backend directory for hot reloading
+    ports:
+      - "8000:8000"             # Map Django development server port
+    # env_file:
+    #   - ./backend/.env          # Environment variables for the backend
+    command: python manage.py runserver 0.0.0.0:8000  # Start Django development server
+    depends_on:
+      - db
+    environment:
+      DJANGO_DB_NAME: socdb
+      DJANGO_DB_USER: shivesh
+      DJANGO_DB_PASSWORD: shivesh  # Use the same secret
+      DJANGO_DB_HOST: db  # Name of the `db` service in the same Docker network
+      DJANGO_DB_PORT: 5432
+      DOMAIN_NAME: http://localhost:3000/wncc-soc
+
+  frontend:
+    build:
+      context: ./socfrontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./socfrontend:/app         # Mount the local frontend directory for hot reloading
+      - /app/node_modules       # Prevent issues with node_modules being overridden
+    ports:
+      - "3000:3000"             # Map React development server port
+    stdin_open: true            # Keep the container open for debugging (optional)
+    tty: true                   # Interactive terminal
+    command: pnpm start         # Start React development server
+    environment:
+      REACT_APP_API_URL: http://localhost:8000  
+
+volumes:
+  postgres_data:  # Define the named volume
+    driver: local
